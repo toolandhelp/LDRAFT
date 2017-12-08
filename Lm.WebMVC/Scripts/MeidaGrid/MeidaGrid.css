@@ -1,0 +1,51 @@
+﻿*{padding:0;margin:0;}
+.MeidaGridArea {*zoom:1;margin:0 2px;background:#fff}
+.MeidaGrid{table-layout:fixed;word-wrap:break-word;width: 100%;border-collapse:collapse;border-spacing:0;color:#545454;border: 1px solid #b8b8b8;}
+.MeidaGrid tr.trbg1{background:#fff;}
+.MeidaGrid tr.trbg2{background:#fff;}
+.MeidaGrid tr:hover{background-color:#ECEDEF; }
+.MeidaGrid tr.selected{background-color: #DFE8F6;}
+.MeidaGrid tr th{font-size:16px;font-weight:bold;border: 1px solid #D3B9B8;line-height:32px;text-align:center;background: #901B21;color: white;cursor:default;}
+.MeidaGrid tr th.chkAll{cursor:auto;width:25px;}
+.MeidaGrid tr th.chkAll input{vertical-align: middle;}
+.MeidaGrid tr th.sort span{display:block;position:relative;cursor:pointer;}
+.MeidaGrid tr th.sort span i{position:absolute;right:0;bottom:0;display:inline-block;width:9px;height:15px;z-index:1;background:url("images/sort_a.png") no-repeat scroll -3px -1px;}
+.MeidaGrid tr th.asc span i{bottom:3px;height:8px;background:url("images/sort.png") no-repeat scroll -3px -1px;}
+.MeidaGrid tr th.desc span i{bottom:3px;height:8px;background:url("images/sort.png") no-repeat scroll -3px -7px;}
+.MeidaGrid tr td{border: 1px solid #D3B9B8;text-align:center;}
+.MeidaGrid tr td label{display:inline-block;white-space: nowrap;text-overflow:ellipsis;overflow:hidden;line-height:28px;vertical-align: middle;padding:0 5px;}
+.MeidaGrid tr td label.algin_l{text-align:left;}
+.MeidaGrid tr td label.algin_c{text-align:center;}
+.MeidaGrid tr td label.algin_r{text-align:right;}
+.MeidaGrid tr td a {color:#3ea3ff;}
+.MeidaGrid tr td a:hover {text-decoration:underline;}
+.MeidaGrid tr.loading,.MeidaGrid tr.empty,.MeidaGrid tr.error {height:100px;}
+.MeidaGrid tr.loading img {display:inline;}
+.MeidaGrid tr.loading:hover,.MeidaGrid tr.empty:hover,.MeidaGrid tr.error:hover {background:#fff;}
+
+.MeidaGrid .clearFilter{cursor:pointer;line-height: 22px;font-family:Tahoma;font-size:18px;font-weight:bold;color:Red;}
+.MeidaGrid .trFilter{background:#e6e6e6;}
+.MeidaGrid .trFilter input{width:95%;border:gray 1px solid;line-height:20px;}
+/*列表分页样式*/
+.Meidagrid-pager{width: auto;height: 28px;overflow: hidden;font-size: 9pt;position: relative;border: 1px solid #D3B9B8;border-top: 0 none;}
+.separator {overflow: hidden;display: inline-block;zoom: 1;border: 0;border-left: solid 1px #6593cf;margin: 1px;margin-top: 0px;height: 18px;vertical-align: middle;margin-left: 8px;margin-right: 8px;}
+.Meidagrid-pager-right {float: right;line-height: 28px;padding-right: 5px;}
+.Meidagrid-pager-right span{margin:0 5px;}
+.Meidagrid-pager-left {padding-top: 3px;padding-top: 2px\9;_padding: 2px;line-height: 25px;height: 25px;overflow: hidden;padding-left: 2px;float: left;position: relative;top: -1px;}
+.Meidagrid-pager-num input {border: 1px solid #D3B9B8;height: 21px;margin-right: 5px;text-align: center;width: 35px;position:relative;margin-bottom: 4px;}
+.Meidagrid-pager-button{width:30px;height: 25px;margin-top:-4px;display: inline-block;*zoom: 1;cursor: pointer;-khtml-user-select: none;-moz-user-select: none;vertical-align: middle;}
+.Meidagrid-pager-button-disabled {cursor: default;opacity: 0.7;-moz-opacity: 0.7;filter: alpha(opacity=70);}
+.Meidagrid-pager-button-reload {width:30px;height: 25px;margin-top:-4px;display: inline-block;*zoom: 1;cursor: pointer;-khtml-user-select: none;-moz-user-select: none;vertical-align: middle;background: url("images/bg_pager.png") no-repeat scroll -280px -5px;}
+.Meidagrid-pager-button-reload:hover{background:url("images/bg_pager.png") no-repeat scroll -319px -4px;}
+.pager-first {background:url("images/bg_pager.png") no-repeat scroll 0 -5px;}
+.pager-first:hover{background: url("images/bg_pager.png") no-repeat scroll -130px -4px;}
+.pager-first.Meidagrid-pager-button-disabled:hover{background:url("images/bg_pager.png") no-repeat scroll 0 -5px;}
+.pager-prev {background:url("images/bg_pager.png") no-repeat scroll -32px -5px;}
+.pager-prev:hover{background:url("images/bg_pager.png") no-repeat scroll -170px -4px;}
+.pager-prev.Meidagrid-pager-button-disabled:hover {background:url("images/bg_pager.png") no-repeat scroll -32px -5px;}
+.pager-next {background:url("images/bg_pager.png") no-repeat scroll -65px -5px;}
+.pager-next:hover{background:url("images/bg_pager.png") no-repeat scroll -207px -4px;}
+.pager-next.Meidagrid-pager-button-disabled:hover {background:url("images/bg_pager.png") no-repeat scroll -65px -5px;}
+.pager-last {background: url("images/bg_pager.png") no-repeat scroll -97px -5px;}
+.pager-last:hover{background:url("images/bg_pager.png") no-repeat scroll -244px -4px;}
+.pager-last.Meidagrid-pager-button-disabled:hover {background: url("images/bg_pager.png") no-repeat scroll -97px -5px;}

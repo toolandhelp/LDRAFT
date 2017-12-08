@@ -1,0 +1,370 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="utf-8">
+
+    <title>@ViewBag.CompanyName</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+
+    <link href="~/Content/style.css" rel="stylesheet">
+
+    <link href="~/Content/camera.css" rel="stylesheet">
+
+    <link href="~/Content/icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css" media="screen" />
+
+    <link href="~/Content/bootstrap-responsive.css" rel="stylesheet">
+
+    <!--Jquery-->
+    <script src="~/js/jquery.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+
+      <script src="~/js/html5shiv.js"></script>
+
+    <![endif]-->
+    <script>
+
+        $(function () {
+            initWindow();
+        });
+
+        function initWindow() {
+            InitFrameSize();
+            $(window).resize(function () {
+                InitFrameSize();
+            });
+        }
+        function InitFrameSize() {
+            var contentHeight = $(document).find("body").height();
+            var frame = $("#main", window.parent.document);
+            var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
+            frame.height(initHeight > contentHeight ? initHeight : contentHeight + 30);
+        }
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <div class="camera_wrap pattern_4 camera_emboss" id="camera_wrap_4">
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $.ajax({
+                            url: 'LatestWork',
+                            type: 'POST',
+                            async: false,
+                            dataType: "json",
+                            beforeSend: function () {
+                                $("#camera_wrap_4").html("<div style='width:120px;margin: 0 auto;color:#fff'> <img src= '/Images/loading.gif' width= '32px' height= '32px' align= 'absmiddle' /> 正加载...</div > ");
+                            },
+                            ContentType: "application/json;charset=utf-8",
+                            success: function (responseList) {
+                                var buf = [];
+                                if (responseList.ErrorType == "1") {
+                                    for (var i = 0; i < responseList.Data.length; i++) {
+
+                                        buf.push("<div data-src=\"/img/demo/slide3.jpg\">");
+
+                                        buf.push("<div class=\"camera_caption fadeFromTop\" >");
+                                        //<div class="camera_caption fadeFromTop">
+
+                                        buf.push("<h1>" + responseList.Data[i].name + "</h1>");
+
+                                        buf.push("<span>" + responseList.Data[i].description + "</span>");
+
+                                        buf.push("</div>");
+
+                                        buf.push("</div>");
+
+                                    }
+                                }
+                                $("#camera_wrap_4").html(buf.join(""));
+                            },
+                            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                                MISSY.iDebugAjaxError(xmlHttpRequest, textStatus, errorThrown);
+                                $("#camera_wrap_4").html("数据加载失败,请稍后再试.");
+                            }
+
+
+                        });
+                    });
+
+                </script>
+
+
+            </div>
+
+            <div class="text-center">
+
+                <img src="~/img/sha.png" class="slidershadowcam" alt="">
+
+            </div>
+
+        </div>
+
+        <div class="row-fluid text-center intro">
+
+            <div class="span12">
+
+                <h1>@ViewBag.CInfoD_T</h1>
+                <p class="featured lead bottom10">
+                    @ViewBag.CInfoD
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="row-fluid graysection">
+
+            @Html.Raw(ViewBag.Service)
+
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="span6">
+
+                <div class="titleborder">
+
+                    <div>
+
+                        最近项目
+
+                    </div>
+
+                </div>
+
+                <div class="heightauto">
+
+                    <div class="list_carousel">
+
+                        <div class="carousel_nav">
+
+                            <a class="prev" id="car_prev" href="#"><span>prev</span></a>
+
+                            <a class="next" id="car_next" href="#"><span>next</span></a>
+
+                        </div>
+
+                        <div class="clearfix">
+
+                        </div>
+
+                        <ul id="recent-projects">
+
+                            @Html.Raw(ViewBag.RecentProjects)
+
+                            @*<script>
+                                    $(document).ready(function () {
+                                        var buf = [];
+                                        $.ajax({
+                                            url: "Take5Work",
+                                            type: "post",
+                                            async: false,
+                                            dataType: "json",
+                                            ContentType: "application/json;charset=utf-8",
+                                            success: function (response) {
+                                                //返回正确数据
+                                                if (response.ErrorType == "1") {
+                                                    for (var i = 0; i < response.Data.length; i++) {
+                                                        buf.push("<li>");
+                                                        buf.push("<p>");
+                                                        buf.push("<img src=\"/img/demo/300x200.png\" class=\"imgproject\" alt=\"\">");
+                                                        buf.push("<b>" + response.Data[i].name + "</b>" + response.Data[i].description + "<a href=\"#\">[...]</a>");
+                                                        buf.push("</p>");
+                                                        buf.push("<p>");
+                                                        buf.push("<a href=\"#fakelink\" class=\"btn btn-primary\"><i class=\"icon-share-alt\"></i>查看类似项目</a>");
+                                                        buf.push("</p>");
+                                                        buf.push("</li>");
+                                                    }
+
+                                                    $("#recent-projects").html(buf.join(""));;
+                                                }
+                                            },
+                                            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                                                MISSY.iDebugAjaxError(xmlHttpRequest, textStatus, errorThrown);
+                                                $("#recent-projects").html("数据加载失败,请稍后再试！");
+                                            }
+                                        });
+
+                                    });
+                                </script>*@
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="clearfix">
+
+                </div>
+
+            </div>
+
+            <div class="span6">
+
+                <div class="titleborder">
+
+                    <div>
+
+                        为什么选择我们
+
+                    </div>
+
+                </div>
+
+                <div class="accordion">
+
+                    <h3><span>Quis dolor id nunc</span></h3>
+
+                    <div class="accord_cont">
+
+                        <p>
+
+                            Nunc sit amet velit metus. At leo tincidunt felis facilisis tincidunt. Proin posuere, ligula nec porttitor eget luctus, risus
+                            lectus tristique ligula, quis pretium elit diam a nisi eget mauris vestibulum. Proin vehicula malesuada dolor, vel
+                            rutrum. quam sollicitu hasellus turpis justo, sagittis sit amet elementum eget, ultricies ac tortor. Ut est mi, consequat
+                            ut bibendum quis, vehicula vel nibh. In urna tortor, pulvinar ut.
+
+                        </p>
+
+                    </div>
+
+                    <h3><span>Mauris suspendisse laoreet imperdiet</span></h3>
+
+                    <div class="accord_cont">
+
+                        <p>
+
+                            At leo tincidunt felis facilisis tincidunt. Nunc sit amet velit metus. Proin posuere, ligula nec porttitor eget luctus, risus
+                            lectus tristique ligula, quis pretium elit diam a nisi eget mauris vestibulum. Proin vehicula malesuada dolor, vel
+                            rutrum. quam sollicitu hasellus turpis justo, sagittis sit amet elementum eget, ultricies ac tortor. Ut est mi, consequat
+                            ut bibendum quis, vehicula vel nibh. In urna tortor, pulvinar ut.
+
+                        </p>
+
+                    </div>
+
+                    <h3><span>Quis porttitor semper mauris!</span></h3>
+
+                    <div class="accord_cont">
+
+                        <p>
+
+                            At leo tincidunt felis facilisis tincidunt. Nunc sit amet velit metus. Proin posuere, ligula nec porttitor eget luctus, risus
+                            lectus tristique ligula, quis pretium elit diam a nisi eget mauris vestibulum. Proin vehicula malesuada dolor, vel
+                            rutrum. quam sollicitu hasellus turpis justo, sagittis sit amet elementum eget, ultricies ac tortor. Ut est mi, consequat
+                            ut bibendum quis, vehicula vel nibh. In urna tortor.
+
+                        </p>
+
+                    </div>
+
+                    <h3><span>Eros odio ornare commodo</span></h3>
+
+                    <div class="accord_cont">
+
+                        <p>
+
+                            Ut est mi, consequat ut bibendum quis, vehicula vel nibh. At leo tincidunt felis facilisis tincidunt. Nunc sit amet velit
+                            metus. Proin posuere, ligula nec porttitor eget luctus, risus lectus tristique ligula, quis pretium elit diam a nisi
+                            eget mauris vestibulum. Proin vehicula malesuada dolor, vel rutrum. quam sollicitu hasellus turpis justo, sagittis
+                            sit amet elementum eget, ultricies ac tortor.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row-fluid graysection text-center">
+
+            @* <p class="lead bottom0">
+
+                    <i class="icon-envelope"></i> 获得更多需要帮助吗?支持保障: <a href="mailto:test@gmail.com">test@gmail.com</a>
+
+                </p>*@
+
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="span12">
+
+                <div class="titleborder">
+
+                    <div>
+
+                        最新消息
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row-fluid recent-posts">
+
+            @Html.Raw(ViewBag.HotNews)
+
+        </div>
+
+        <div class="row-fluid top25">
+
+            @*<div class="panel1">
+
+                <div class="span9">
+
+                     <h4 class="top0">BISCAYA MultiPurpose Responsive</h4>
+
+                     Aliquam convallis, urna vel luctus consequat, urna leo adipiscing sapien, mattis molestie nulla augue sed elit. Pellentesque
+                     interdum mi non dolor facilisis porta. Cras venenatis dolor sed magna rhoncus non fermentum.
+
+                 </div>
+
+                 <div class="span3 text-center top15">
+
+                     <a href="contact.html" class="btn btn-primary btn-large">
+
+                         <i class="icon icon-download-alt"></i> Download Now
+                     </a>
+
+                 </div>
+
+                                <div class="clearfix">
+
+                                </div>
+
+                            </div>*@
+
+        </div>
+    </div>
+</body>
+</html>

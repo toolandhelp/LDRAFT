@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="lmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="td_Articles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticlesType" Type="int" Nullable="false" />
+          <Property Name="ArticlesContent" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="ArticlesTitle" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Creationtime" Type="datetime" Nullable="false" />
+          <Property Name="ImgPath" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="td_CompanyInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Company_Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Company_Call" Type="varchar" MaxLength="25" />
+          <Property Name="Company_Email" Type="varchar" MaxLength="50" />
+          <Property Name="Company_Description_T" Type="varchar" MaxLength="100" />
+          <Property Name="Company_description" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="td_Dictionary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FId" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IconImg" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuId" Type="int" />
+          <Property Name="Sort" Type="int" />
+        </EntityType>
+        <EntityType Name="td_Menu_A">
+          <Key>
+            <PropertyRef Name="menu_Code" />
+          </Key>
+          <Property Name="menu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menu_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="menu_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="menu_FatherId" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Link" Type="varchar" MaxLength="200" />
+          <Property Name="menu_Image" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Title" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Target" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Sort" Type="int" />
+          <Property Name="menu_Stage" Type="int" Nullable="false" />
+          <Property Name="menu_Note" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="td_Menu_B">
+          <Key>
+            <PropertyRef Name="menu_Code" />
+          </Key>
+          <Property Name="menu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menu_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="menu_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="menu_FatherId" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Link" Type="varchar" MaxLength="200" />
+          <Property Name="menu_Image" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Title" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Target" Type="varchar" MaxLength="50" />
+          <Property Name="menu_Sort" Type="int" />
+          <Property Name="menu_Stage" Type="int" Nullable="false" />
+          <Property Name="menu_Note" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="td_News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="News_Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="News_Date" Type="datetime" Nullable="false" />
+          <Property Name="News_People" Type="int" Nullable="false" />
+          <Property Name="News_Content" Type="nvarchar" MaxLength="550" Nullable="false" />
+          <Property Name="News_CommentariesID" Type="int" />
+          <Property Name="News_ImgId" Type="int" Nullable="false" />
+          <Property Name="News_CDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="td_Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Project_Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Project_People" Type="int" Nullable="false" />
+          <Property Name="Project_Start" Type="datetime" Nullable="false" />
+          <Property Name="Project_End" Type="datetime" Nullable="false" />
+          <Property Name="Project_Description" Type="varchar" MaxLength="250" />
+          <Property Name="Create_date" Type="datetime" Nullable="false" />
+          <Property Name="Project_ImgId" Type="int" />
+          <Property Name="Create_People" Type="int" />
+        </EntityType>
+        <EntityType Name="td_TeamPeople">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="People_En" Type="nvarchar" MaxLength="50" />
+          <Property Name="People_Cn" Type="nvarchar" MaxLength="50" />
+          <Property Name="People_Occupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="People_Specialty" Type="nvarchar" MaxLength="50" />
+          <Property Name="People_Slogan" Type="nvarchar" MaxLength="50" />
+          <Property Name="People_Profile" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="BizCode" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="CrateId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityContainer Name="lmModelStoreContainer">
+          <EntitySet Name="td_Articles" EntityType="Self.td_Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="td_CompanyInfo" EntityType="Self.td_CompanyInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="td_Dictionary" EntityType="Self.td_Dictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="td_Menu_A" EntityType="Self.td_Menu_A" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="td_Menu_B" EntityType="Self.td_Menu_B" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="td_News" EntityType="Self.td_News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="td_Project" EntityType="Self.td_Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="td_TeamPeople" EntityType="Self.td_TeamPeople" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="lmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="td_Menu_B">
+          <Key>
+            <PropertyRef Name="menu_Code" />
+          </Key>
+          <Property Name="menu_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menu_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="menu_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="menu_FatherId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Target" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Sort" Type="Int32" />
+          <Property Name="menu_Stage" Type="Int32" Nullable="false" />
+          <Property Name="menu_Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="td_News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="News_Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="News_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="News_People" Type="Int32" Nullable="false" />
+          <Property Name="News_Content" Type="String" MaxLength="550" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="News_CommentariesID" Type="Int32" />
+          <Property Name="News_ImgId" Type="Int32" Nullable="false" />
+          <Property Name="News_CDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="td_Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Project_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Project_People" Type="Int32" Nullable="false" />
+          <Property Name="Project_Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Project_End" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Project_Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Project_ImgId" Type="Int32" />
+          <Property Name="Create_People" Type="Int32" />
+        </EntityType>
+        <EntityType Name="td_TeamPeople">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="People_En" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="People_Cn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="People_Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="People_Specialty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="People_Slogan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="People_Profile" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="lmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="td_Menu_B" EntityType="Self.td_Menu_B" />
+          <EntitySet Name="td_News" EntityType="Self.td_News" />
+          <EntitySet Name="td_Project" EntityType="Self.td_Project" />
+          <EntitySet Name="td_TeamPeople" EntityType="Self.td_TeamPeople" />
+          <EntitySet Name="td_Menu_A" EntityType="lmModel.td_Menu_A" />
+          <EntitySet Name="td_Articles" EntityType="lmModel.td_Articles" />
+          <EntitySet Name="td_Dictionary" EntityType="lmModel.td_Dictionary" />
+          <EntitySet Name="td_CompanyInfo" EntityType="lmModel.td_CompanyInfo" />
+          <EntitySet Name="Users" EntityType="lmModel.Users" />
+        </EntityContainer>
+        <EntityType Name="td_Menu_A">
+          <Key>
+            <PropertyRef Name="menu_Code" />
+          </Key>
+          <Property Name="menu_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menu_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_FatherId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Target" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Sort" Type="Int32" />
+          <Property Name="menu_Stage" Type="Int32" Nullable="false" />
+          <Property Name="menu_Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="td_Articles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticlesType" Type="Int32" Nullable="false" />
+          <Property Name="ArticlesContent" Type="String" Nullable="false" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="ArticlesTitle" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Creationtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ImgPath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="td_Dictionary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FId" Type="Int32" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IconImg" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenuId" Type="Int32" />
+          <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="td_CompanyInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company_Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Company_Call" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Description_T" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Company_description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="BizCode" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CrateId" Type="Guid" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="lmModelStoreContainer" CdmEntityContainer="lmEntities">
+          <EntitySetMapping Name="td_Menu_B">
+            <EntityTypeMapping TypeName="lmModel.td_Menu_B">
+              <MappingFragment StoreEntitySet="td_Menu_B">
+                <ScalarProperty Name="menu_Id" ColumnName="menu_Id" />
+                <ScalarProperty Name="menu_Code" ColumnName="menu_Code" />
+                <ScalarProperty Name="menu_Name" ColumnName="menu_Name" />
+                <ScalarProperty Name="menu_FatherId" ColumnName="menu_FatherId" />
+                <ScalarProperty Name="menu_Link" ColumnName="menu_Link" />
+                <ScalarProperty Name="menu_Image" ColumnName="menu_Image" />
+                <ScalarProperty Name="menu_Title" ColumnName="menu_Title" />
+                <ScalarProperty Name="menu_Target" ColumnName="menu_Target" />
+                <ScalarProperty Name="menu_Sort" ColumnName="menu_Sort" />
+                <ScalarProperty Name="menu_Stage" ColumnName="menu_Stage" />
+                <ScalarProperty Name="menu_Note" ColumnName="menu_Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="td_News">
+            <EntityTypeMapping TypeName="lmModel.td_News">
+              <MappingFragment StoreEntitySet="td_News">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="News_Title" ColumnName="News_Title" />
+                <ScalarProperty Name="News_Date" ColumnName="News_Date" />
+                <ScalarProperty Name="News_People" ColumnName="News_People" />
+                <ScalarProperty Name="News_Content" ColumnName="News_Content" />
+                <ScalarProperty Name="News_CommentariesID" ColumnName="News_CommentariesID" />
+                <ScalarProperty Name="News_ImgId" ColumnName="News_ImgId" />
+                <ScalarProperty Name="News_CDate" ColumnName="News_CDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="td_Project">
+            <EntityTypeMapping TypeName="lmModel.td_Project">
+              <MappingFragment StoreEntitySet="td_Project">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="Project_Location" ColumnName="Project_Location" />
+                <ScalarProperty Name="Project_People" ColumnName="Project_People" />
+                <ScalarProperty Name="Project_Start" ColumnName="Project_Start" />
+                <ScalarProperty Name="Project_End" ColumnName="Project_End" />
+                <ScalarProperty Name="Project_Description" ColumnName="Project_Description" />
+                <ScalarProperty Name="Create_date" ColumnName="Create_date" />
+                <ScalarProperty Name="Project_ImgId" ColumnName="Project_ImgId" />
+                <ScalarProperty Name="Create_People" ColumnName="Create_People" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="td_TeamPeople">
+            <EntityTypeMapping TypeName="lmModel.td_TeamPeople">
+              <MappingFragment StoreEntitySet="td_TeamPeople">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="People_En" ColumnName="People_En" />
+                <ScalarProperty Name="People_Cn" ColumnName="People_Cn" />
+                <ScalarProperty Name="People_Occupation" ColumnName="People_Occupation" />
+                <ScalarProperty Name="People_Specialty" ColumnName="People_Specialty" />
+                <ScalarProperty Name="People_Slogan" ColumnName="People_Slogan" />
+                <ScalarProperty Name="People_Profile" ColumnName="People_Profile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="td_Menu_A">
+            <EntityTypeMapping TypeName="lmModel.td_Menu_A">
+              <MappingFragment StoreEntitySet="td_Menu_A">
+                <ScalarProperty Name="menu_Note" ColumnName="menu_Note" />
+                <ScalarProperty Name="menu_Stage" ColumnName="menu_Stage" />
+                <ScalarProperty Name="menu_Sort" ColumnName="menu_Sort" />
+                <ScalarProperty Name="menu_Target" ColumnName="menu_Target" />
+                <ScalarProperty Name="menu_Title" ColumnName="menu_Title" />
+                <ScalarProperty Name="menu_Image" ColumnName="menu_Image" />
+                <ScalarProperty Name="menu_Link" ColumnName="menu_Link" />
+                <ScalarProperty Name="menu_FatherId" ColumnName="menu_FatherId" />
+                <ScalarProperty Name="menu_Name" ColumnName="menu_Name" />
+                <ScalarProperty Name="menu_Code" ColumnName="menu_Code" />
+                <ScalarProperty Name="menu_Id" ColumnName="menu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="td_Articles">
+            <EntityTypeMapping TypeName="lmModel.td_Articles">
+              <MappingFragment StoreEntitySet="td_Articles">
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="Creationtime" ColumnName="Creationtime" />
+                <ScalarProperty Name="ArticlesTitle" ColumnName="ArticlesTitle" />
+                <ScalarProperty Name="ArticlesContent" ColumnName="ArticlesContent" />
+                <ScalarProperty Name="ArticlesType" ColumnName="ArticlesType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="td_Dictionary">
+            <EntityTypeMapping TypeName="lmModel.td_Dictionary">
+              <MappingFragment StoreEntitySet="td_Dictionary">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="IconImg" ColumnName="IconImg" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FId" ColumnName="FId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="td_CompanyInfo">
+            <EntityTypeMapping TypeName="lmModel.td_CompanyInfo">
+              <MappingFragment StoreEntitySet="td_CompanyInfo">
+                <ScalarProperty Name="Company_description" ColumnName="Company_description" />
+                <ScalarProperty Name="Company_Description_T" ColumnName="Company_Description_T" />
+                <ScalarProperty Name="Company_Email" ColumnName="Company_Email" />
+                <ScalarProperty Name="Company_Call" ColumnName="Company_Call" />
+                <ScalarProperty Name="Company_Address" ColumnName="Company_Address" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="lmModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="CrateId" ColumnName="CrateId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="BizCode" ColumnName="BizCode" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

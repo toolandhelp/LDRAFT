@@ -1,0 +1,93 @@
+/* 
+* @Author: nichenqi
+* @Date:   2016-05-23 20:57:46
+* @Last Modified by:   nichenqi
+* @Last Modified time: 2016-05-25 01:40:36
+*/
+/*侧导航*/
+.main{
+	margin-bottom:10px;
+}
+.sidebar-nav{
+	width:210px;
+	margin-top:-45px;
+	background:#cc2954;
+	height:513px;
+	border-top:1px solid #cc2954;
+	border-bottom:1px solid #cc2954;
+	position:absolute;
+	z-index: 1;
+}
+.sidebar-nav h2{
+	height:45px;
+	font:14px/45px 微软雅黑;
+	color:#fff;
+	padding:0 12px 0 9px;
+	background:#cc2954;
+	border-left:1px solid #cc2954;
+}
+.sidebar-nav li{
+	padding:0 12px 0 9px;
+	border-left:1px solid #cc2954;
+	height:35px;
+	border-bottom:1px dashed #d95175;
+}
+.sidebar-nav li>a{
+	color:#fff;
+	float:left;
+	line-height:35px;
+	height:35px;
+}
+.sidebar-nav li:hover{
+	background:#fff;
+	border-bottom:1px solid #fff;
+}
+.sidebar-nav li:hover a{
+	color:#b61d1d;
+}
+.sidebar-nav li>i{
+	float:right;
+	color:#fff;
+	font:400 9px/31px consolas;
+}
+.sidebar-nav li:nth-child(1){
+	background-color:#f67e9e;
+	border-bottom:1px solid #f67e9e;
+}
+.sidebar-nav li:hover:nth-child(1){
+	background-color:#fff;
+}
+.sidebar-nav li:nth-last-child(1){
+	border-bottom:1px solid #b61d1d;
+}
+.sidebar-nav li:hover:nth-last-child(1){
+	border-bottom-color:#fff;
+}
+/*banner*/
+.list-banner{
+	height:469px;
+	width:100%;
+	overflow:hidden;
+	position:relative;
+	border-top:2px solid #cc2954;
+}
+.banner-img{
+	height:469px;
+}
+.banner-img ul{
+	width:400%;
+	position:absolute;
+	left:0;
+}
+.banner-img li{
+	float:left;
+	position:relative;
+	width:25%;
+	height:470px;
+	overflow:hidden;
+}
+.list-banner img{
+	position:absolute;
+	left:50%;
+	margin-left:-960px;
+}

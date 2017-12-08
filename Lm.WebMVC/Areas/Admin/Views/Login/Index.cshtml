@@ -1,0 +1,201 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="zh" class="fullscreen-bg">
+<head>
+    <title>登陆</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="~/Areas/Admin/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/assets/vendor/linearicons/style.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="~/Areas/Admin/assets/css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <!--<link rel="stylesheet" href="~/Areas/Admin/assets/css/demo.css">-->
+    <!--FONTS -->
+    <link href="~/Areas/Admin/assets/css/css.css" rel="stylesheet">
+    <!-- ICONS -->
+    @*<link rel="apple-touch-icon" sizes="76x76" href="~/Areas/Admin/assets/img/apple-icon.png">*@
+    @*<link rel="icon" type="image/png" sizes="96x96" href="~/Areas/Admin/assets/img/favicon.png">*@
+    <link href="~/Areas/Admin/assets/vendor/toastr/toastr.min.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <div class="vertical-align-wrap">
+            <div class="vertical-align-middle">
+                <div class="auth-box ">
+                    <div class="left">
+                        <div class="content">
+                            <div class="header">
+                                <div class="logo text-center"><img src="~/Areas/Admin/assets/img/logo-dark.png" alt="LdRaft Logo"></div>
+                                <p class="lead">登录你的账户</p>
+                            </div>
+                            <div class="form-auth-small" >
+                                <div class="form-group">
+                                    <label for="signin-email" class="control-label sr-only">邮箱</label>
+                                    <input type="email" class="form-control" id="signin-email" value="Dev" placeholder="账户">
+                                </div>
+                                <div class="form-group">
+                                    <label for="signin-password" class="control-label sr-only">密码</label>
+                                    <input type="password" class="form-control" id="signin-password" value="111111" placeholder="密码">
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="signin-code" placeholder="验证码" size="5">
+                                        <span class="input-group-btn">
+                                            <img src="" alt="看不清，换一张" title="看不清，换一张" id="signin-imgcode" style=" height:34px;"/>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="fancy-checkbox element-left">
+                                        <input type="checkbox" id="cbRemember">
+                                        <span>记住我</span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">登 录</button>
+                                <div class="bottom">
+                                    <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">忘记密码?</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="overlay"></div>
+                        <div class="content text">
+                            <h1 class="heading">专注项目品质</h1>
+                            <p>by The Toolandhlep</p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END WRAPPER -->
+
+
+
+</body>
+</html>
+<script src="~/Areas/Admin/assets/vendor/jquery/jquery.min.js"></script>
+<script src="~/Areas/Admin/assets/vendor/toastr/toastr.min.js"></script>
+<script src="~/Scripts/require/require/2.2.0/require.js"></script>
+<script src="~/Scripts/require/config/1.0.0/require.config.js"></script>
+<script type="text/javascript">
+    require(["jquery", "MISSY", "jquery.md5"], function () {
+        $(function () {
+            var layerLoadIdx = -1;
+            initPage();
+        });
+        function initPage() {
+            $(".btn-block").click(function () {
+                Login();
+            });
+            $("#signin-imgcode").click();
+            $("body").keyup(function (event) {
+                var e = document.all ? window.event : event;
+                var keycode = (e.keyCode ? e.keyCode : e.which);
+                if (keycode === 13) {
+                    Login();
+                }
+            });
+            $("#signin-imgcode").click(function () { ClickValidateCode(); }).click();
+        }
+
+        //验证码
+        function ClickValidateCode() 
+        {
+            $("#signin-code").val("");
+            $("#signin-imgcode").prop('src', '/Login/CodeImg?_r=' + Math.random());
+        }
+
+        //登陆
+        function Login() {
+            var UserName = MISSY.Trim($("#signin-email").val());
+            if (MISSY.IsEmpty(UserName)) {
+                AlertShow("top-center", false, true, "warning", "账户不能为空");
+                $("#signin-email").focus();
+                return false;
+            }
+            var Password = MISSY.Trim($("#signin-password").val());
+            if (MISSY.IsEmpty(Password)) {
+                AlertShow("top-center", false, true, "warning", "密码不能为空");
+                $("#signin-password").focus();
+                return false;
+            }
+            var Code = MISSY.Trim($("#signin-code").val());
+            if (MISSY.IsEmpty(Code)) {
+                AlertShow("top-center", false, true, "warning", "验证码不能为空");
+                $("#signin-code").focus();
+                return false;
+            }
+            var Remember = 0;
+            if (document.getElementById("cbRemember").checked) {
+                Remember = 1;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "SysLogin",
+                data: { UserName: UserName, Password: $.md5(Password), Code: Code, Remember: Remember },
+                dataType: "json",
+                beforeSend: function () {
+                    layerLoadIdx = MISSY.iShowLoading("登录中...");
+
+                    $(".btn-block").prop("disabled", true);
+                },
+                success: function (response) {
+                    if (!response) { MISSY.iErrorReturnNull(); return; }
+                    if (response.ErrorType === 1) { location.href = "/Admin/Home/Index?_r=" + Math.random(); }
+                    else {
+                        ClickValidateCode();
+                        AlertShow("top-center", false, true, "warning", response.MessageContent)
+                    }
+                },
+                error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    AlertShow("top-center", false, true, "error", "系统忙,请稍后再试")
+                },
+                complete: function (xmlHttpRequest, textStatus) {
+                    MISSY.iHideLoading(layerLoadIdx);
+                    $(".btn-block").prop("disabled", false);
+                }
+            });
+            return true;
+
+        }
+
+        //重置
+        function Resert() {
+            $("#signin-email").val("");
+            $("#signin-password").val("");
+            $("#signin-code").val("");
+        }
+
+        //弹出方式toast-left-top,是否自动关闭bool,是否有关闭按钮bool,状态warning;info;success;error,内容
+        function AlertShow(alertType, timeOut, closeButton, infoType, Context) {
+            if (alertType != "") {
+                alertType = "toast-" + alertType;
+                toastr.remove();
+                toastr.options.timeOut = timeOut;
+                toastr.options.closeButton = closeButton;
+                toastr[infoType](Context, '', { positionClass: alertType });
+            } else {
+                toastr.remove();
+                toastr.options.timeOut = timeOut;
+                toastr.options.closeButton = closeButton;
+                toastr[infoType](Context);
+            }
+        }
+
+    });
+</script>
