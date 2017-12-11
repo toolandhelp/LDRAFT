@@ -12,14 +12,17 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class td_Dictionary
+    public partial class Sys_LOG
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> FId { get; set; }
-        public string Description { get; set; }
-        public string IconImg { get; set; }
-        public Nullable<int> MenuId { get; set; }
-        public Nullable<int> Sort { get; set; }
+        public int ID { get; set; }
+        public Nullable<System.DateTime> DATES { get; set; }
+        public string LEVELS { get; set; }
+        public string LOGGER { get; set; }
+        public string CLIENTUSER { get; set; }
+        public string CLIENTIP { get; set; }
+        public string REQUESTURL { get; set; }
+        public string ACTION { get; set; }
+        public string MESSAGE { get; set; }
+        public string EXCEPTION { get; set; }
     }
 }

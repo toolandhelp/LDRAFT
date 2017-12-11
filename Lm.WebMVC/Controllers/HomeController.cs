@@ -53,7 +53,7 @@ namespace Lm.WebMVC.Controllers
             string CompanyName = Config.CompanyName;
 
             var CInfoBll = new BLL_CompanyInfo();
-            td_CompanyInfo CInfo = new td_CompanyInfo();
+            tb_CompanyInfo CInfo = new tb_CompanyInfo();
             CInfo = CInfoBll.GetTopCInfo();
 
 
@@ -111,7 +111,7 @@ namespace Lm.WebMVC.Controllers
         /// </summary>
         /// <param name="sbRP"></param>
         /// <param name="listRp"></param>
-        public void GetTake5Work(ref StringBuilder sbRP, IList<td_Project> listRp)
+        public void GetTake5Work(ref StringBuilder sbRP, IList<tb_Project> listRp)
         {
             if (listRp.Count > 0)
             {
@@ -138,7 +138,7 @@ namespace Lm.WebMVC.Controllers
         /// </summary>
         /// <param name="sbNews"></param>
         /// <param name="listNews"></param>
-        public void GetTop4News(ref StringBuilder sbNews, IList<td_Articles> listNews)
+        public void GetTop4News(ref StringBuilder sbNews, IList<tb_Articles> listNews)
         {
             if (listNews.Count > 0)
             {
@@ -190,7 +190,7 @@ namespace Lm.WebMVC.Controllers
         /// </summary>
         /// <param name="sbService"></param>
         /// <param name="listService"></param>
-        public void Get4Service(ref StringBuilder sbService, IList<td_Dictionary> listService)
+        public void Get4Service(ref StringBuilder sbService, IList<tb_Dictionary> listService)
         {
             if (listService.Count > 0)
             {

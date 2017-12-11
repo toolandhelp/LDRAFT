@@ -12,7 +12,7 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class td_Project
+    public partial class tb_Project
     {
         public int Id { get; set; }
         public string Project_Name { get; set; }

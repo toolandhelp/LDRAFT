@@ -12,7 +12,7 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class td_Menu_B
+    public partial class tb_Menu_B
     {
         public int menu_Id { get; set; }
         public string menu_Code { get; set; }

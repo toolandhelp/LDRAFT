@@ -12,15 +12,17 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class td_News
+    public partial class Sys_Users
     {
-        public int Id { get; set; }
-        public string News_Title { get; set; }
-        public System.DateTime News_Date { get; set; }
-        public int News_People { get; set; }
-        public string News_Content { get; set; }
-        public Nullable<int> News_CommentariesID { get; set; }
-        public int News_ImgId { get; set; }
-        public System.DateTime News_CDate { get; set; }
+        public System.Guid Id { get; set; }
+        public string Account { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+        public bool Sex { get; set; }
+        public bool Status { get; set; }
+        public int Type { get; set; }
+        public string BizCode { get; set; }
+        public System.DateTime CreateTime { get; set; }
+        public Nullable<System.Guid> CrateId { get; set; }
     }
 }

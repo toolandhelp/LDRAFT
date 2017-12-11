@@ -11,18 +11,18 @@ namespace Lm.BLL
     public class BLL_Articles
     {
         #region dbContext
-        public DbHelperEfSql<td_Articles> dbContext { get; set; }
+        public DbHelperEfSql<tb_Articles> dbContext { get; set; }
 
         public BLL_Articles()
         {
-            dbContext = new DbHelperEfSql<td_Articles>();
+            dbContext = new DbHelperEfSql<tb_Articles>();
         }
         #endregion
 
         #region  查询 Search Entity
 
         //查询所有
-        public IList<td_Articles> GetListByAll()
+        public IList<tb_Articles> GetListByAll()
         {
             return dbContext.SearchByAll();
         }

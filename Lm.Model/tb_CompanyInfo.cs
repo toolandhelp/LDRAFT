@@ -12,17 +12,14 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class tb_CompanyInfo
     {
-        public System.Guid Id { get; set; }
-        public string Account { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
-        public bool Sex { get; set; }
-        public bool Status { get; set; }
-        public int Type { get; set; }
-        public string BizCode { get; set; }
-        public System.DateTime CreateTime { get; set; }
-        public Nullable<System.Guid> CrateId { get; set; }
+        public int Id { get; set; }
+        public string Company_Name { get; set; }
+        public string Company_Address { get; set; }
+        public string Company_Call { get; set; }
+        public string Company_Email { get; set; }
+        public string Company_Description_T { get; set; }
+        public string Company_description { get; set; }
     }
 }

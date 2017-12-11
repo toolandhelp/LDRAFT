@@ -25,14 +25,16 @@ namespace Lm.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<td_Menu_B> td_Menu_B { get; set; }
-        public virtual DbSet<td_News> td_News { get; set; }
-        public virtual DbSet<td_Project> td_Project { get; set; }
-        public virtual DbSet<td_TeamPeople> td_TeamPeople { get; set; }
-        public virtual DbSet<td_Menu_A> td_Menu_A { get; set; }
-        public virtual DbSet<td_Articles> td_Articles { get; set; }
-        public virtual DbSet<td_Dictionary> td_Dictionary { get; set; }
-        public virtual DbSet<td_CompanyInfo> td_CompanyInfo { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Sys_Users> Sys_Users { get; set; }
+        public virtual DbSet<tb_Articles> tb_Articles { get; set; }
+        public virtual DbSet<tb_ClientMessage> tb_ClientMessage { get; set; }
+        public virtual DbSet<tb_CompanyInfo> tb_CompanyInfo { get; set; }
+        public virtual DbSet<tb_Dictionary> tb_Dictionary { get; set; }
+        public virtual DbSet<tb_Menu_A> tb_Menu_A { get; set; }
+        public virtual DbSet<tb_Menu_B> tb_Menu_B { get; set; }
+        public virtual DbSet<tb_News> tb_News { get; set; }
+        public virtual DbSet<tb_Project> tb_Project { get; set; }
+        public virtual DbSet<tb_TeamPeople> tb_TeamPeople { get; set; }
+        public virtual DbSet<Sys_LOG> Sys_LOG { get; set; }
     }
 }

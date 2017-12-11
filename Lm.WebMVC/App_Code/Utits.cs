@@ -19,11 +19,11 @@ public class Utits
     #region 暂时注销(当前登录用户信息)
 
     #region 当前登录用户信息
-    public static Users CurrentUser
+    public static Sys_Users CurrentUser
     {
         get
         {
-            Users item = null;
+            Sys_Users item = null;
             try
             {
                 var cBll = new BLL_User();

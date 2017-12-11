@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL_Articles.cs" />
+    <Compile Include="Bll_ClientMessage.cs" />
     <Compile Include="BLL_CompanyInfo.cs" />
     <Compile Include="BLL_Dictionary.cs" />
     <Compile Include="BLL_Menu.cs" />

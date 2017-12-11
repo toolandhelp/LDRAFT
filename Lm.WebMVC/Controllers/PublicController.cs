@@ -42,18 +42,5 @@ namespace Lm.WebMVC.Controllers
             return Json("[]");
         }
 
-        /// <summary>
-        /// 验证码(发送信息)
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult CodeImg()
-        {
-            var itemValidateCode = new CommonLib.ValidateCode();
-            string code = itemValidateCode.CreateValidateCode(4);
-            Session["captcha"] = code;
-            byte[] bytes = itemValidateCode.CreateValidateGraphic(code);
-
-            return File(bytes, @"image/jpg");
-        }
     }
 }

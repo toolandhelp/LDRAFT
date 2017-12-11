@@ -11,29 +11,29 @@ namespace Lm.BLL
     public class BLL_Menu
     {
         #region dbContext
-        public DbHelperEfSql<td_Menu_B> dbContext { get; set; }
+        public DbHelperEfSql<tb_Menu_B> dbContext { get; set; }
         public BLL_Menu()
         {
-            dbContext = new DbHelperEfSql<td_Menu_B>();
+            dbContext = new DbHelperEfSql<tb_Menu_B>();
         }
         #endregion
         #region  查询 Search Entity
 
         //获取单条数据
-        public td_Menu_B GetObjectById(int Id)
+        public tb_Menu_B GetObjectById(int Id)
         {
             return dbContext.SearchBySingle(c => c.menu_Id == Id);
         }
 
         //查询所有部门
-        public IList<td_Menu_B> GetMenu_B_ListByAll()
+        public IList<tb_Menu_B> GetMenu_B_ListByAll()
         {
             return dbContext.SearchByAll();
         }
 
-        public IList<td_Menu_A> GetMenu_A_ListByAll()
+        public IList<tb_Menu_A> GetMenu_A_ListByAll()
         {
-            var service = new DbHelperEfSql<td_Menu_A>();
+            var service = new DbHelperEfSql<tb_Menu_A>();
             return service.SearchByAll();
         }
 

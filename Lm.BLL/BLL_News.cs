@@ -11,22 +11,22 @@ namespace Lm.BLL
     public class BLL_News
     {
         #region dbContext
-        public DbHelperEfSql<td_News> dbContext { get; set; }
+        public DbHelperEfSql<tb_News> dbContext { get; set; }
         public BLL_News()
         {
-            dbContext = new DbHelperEfSql<td_News>();
+            dbContext = new DbHelperEfSql<tb_News>();
         }
         #endregion
         #region  查询 Search Entity
 
         //获取单条数据
-        public td_News GetObjectById(int Id)
+        public tb_News GetObjectById(int Id)
         {
             return dbContext.SearchBySingle(c => c.Id == Id);
         }
 
         //查询所有部门
-        public IList<td_News> GetListByAll()
+        public IList<tb_News> GetListByAll()
         {
             return dbContext.SearchByAll();
         }

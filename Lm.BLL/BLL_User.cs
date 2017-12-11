@@ -11,10 +11,10 @@ namespace Lm.BLL
   public   class BLL_User
     {
         #region dbContext
-        public DbHelperEfSql<Users> dbContext { get; set; }
+        public DbHelperEfSql<Sys_Users> dbContext { get; set; }
         public BLL_User()
         {
-            dbContext = new DbHelperEfSql<Users>();
+            dbContext = new DbHelperEfSql<Sys_Users>();
         }
         #endregion
         #region  查询 Search Entity
@@ -24,7 +24,7 @@ namespace Lm.BLL
         /// </summary>
         /// <param name="sAccount"></param>
         /// <returns></returns>
-        public Users GetObjectByAccount(string sAccount)
+        public Sys_Users GetObjectByAccount(string sAccount)
         {
             return dbContext.SearchBySingle(c => c.Account == sAccount);
         }
@@ -33,7 +33,7 @@ namespace Lm.BLL
         /// 查询所有用户
         /// </summary>
         /// <returns></returns>
-        public IList<Users> GetListByAll()
+        public IList<Sys_Users> GetListByAll()
         {
             return dbContext.SearchByAll();
         }
@@ -43,7 +43,7 @@ namespace Lm.BLL
         /// </summary>
         /// <param name="gid"></param>
         /// <returns></returns>
-        public Users GetObjectById(Guid gid)
+        public Sys_Users GetObjectById(Guid gid)
         {
             return dbContext.SearchBySingle(c => c.Id == gid);
         }
@@ -54,7 +54,7 @@ namespace Lm.BLL
         /// <param name="sUserName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public Users LoginUsers(string sUserName, string password)
+        public Sys_Users LoginUsers(string sUserName, string password)
         {
             return dbContext.SearchBySingle(c => c.Account == sUserName && c.Password == password);
         }

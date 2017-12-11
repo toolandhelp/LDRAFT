@@ -12,14 +12,14 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class td_CompanyInfo
+    public partial class tb_Dictionary
     {
         public int Id { get; set; }
-        public string Company_Name { get; set; }
-        public string Company_Address { get; set; }
-        public string Company_Call { get; set; }
-        public string Company_Email { get; set; }
-        public string Company_Description_T { get; set; }
-        public string Company_description { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> FId { get; set; }
+        public string Description { get; set; }
+        public string IconImg { get; set; }
+        public Nullable<int> MenuId { get; set; }
+        public Nullable<int> Sort { get; set; }
     }
 }

@@ -11,18 +11,18 @@ namespace Lm.BLL
     public class BLL_CompanyInfo
     {
         #region dbContext
-        public DbHelperEfSql<td_CompanyInfo> dbContext { get; set; }
+        public DbHelperEfSql<tb_CompanyInfo> dbContext { get; set; }
 
         public BLL_CompanyInfo()
         {
-            dbContext = new DbHelperEfSql<td_CompanyInfo>();
+            dbContext = new DbHelperEfSql<tb_CompanyInfo>();
         }
         #endregion
 
         #region  查询 Search Entity
 
         //查询所有
-        public IList<td_CompanyInfo> GetListByAll()
+        public IList<tb_CompanyInfo> GetListByAll()
         {
             return dbContext.SearchByAll();
         }
@@ -31,7 +31,7 @@ namespace Lm.BLL
         /// 获取公司信息
         /// </summary>
         /// <returns></returns>
-        public td_CompanyInfo GetTopCInfo()
+        public tb_CompanyInfo GetTopCInfo()
         {
             return dbContext.SearchBySingle(o => o.Id == 1);
         }

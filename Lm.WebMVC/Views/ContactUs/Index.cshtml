@@ -20,15 +20,15 @@
 
     <!-- Le styles -->
 
-    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css?_v=1.1.1" rel="stylesheet">
 
-    <link href="~/Content/style.css" rel="stylesheet">
+    <link href="~/Content/style.css?_v=1.1.1" rel="stylesheet">
 
-    <link href="~/Content/icons.css" rel="stylesheet">
+    <link href="~/Content/icons.css?_v=1.1.1" rel="stylesheet">
 
-    <link href="~/Content/bootstrap-responsive.css" rel="stylesheet">
+    <link href="~/Content/bootstrap-responsive.css?_v=1.1.1" rel="stylesheet">
 
-    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css" media="screen" />
+    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css?_v=1.1.1" media="screen" />
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -60,22 +60,21 @@
 
                 <form action="#" name="MYFORM" id="MYFORM">
 
-                    <input name="name" size="30" type="text" id="name" class="span12" placeholder="Name">
+                    <input name="name" size="30" type="text" id="name" class="span12" maxlength="50" placeholder="姓名">
 
-                    <input name="email" size="30" type="text" id="email" class="span12" placeholder="E-mail Address">
+                    <input name="email" size="30" type="text" id="email" class="span12" maxlength="25" placeholder="邮箱地址">
 
-                    <textarea id="message" name="message" class="span12" placeholder="Message" rows="8"></textarea>
+                    <textarea id="message" name="message" class="span12" placeholder="信息" maxlength="250" rows="8"></textarea>
 
+                    <input name="code" type="text" id="code" placeholder="输入验证码" maxlength="4" class="top10">
                     <img src="~/img/refresh.jpg" width="25" alt="" id="refresh" />
-                    <img src="~/Public/CodeImg" alt="" id="captcha" />
-
-                    <br />
-                    <input name="code" type="text" id="code" placeholder="Enter Captcha" class="top10">
+                    <img src="~/ContactUs/CodeImg" alt="" id="captcha" />
 
                     <br />
 
-                    <input value="Send" type="submit" id="Send" class="btn btn-primary top10">
+                    <input value="发送" type="submit" id="Send" class="btn btn-primary top10">
 
+                    <span id="tempid"></span>
                 </form>
 
             </div>
@@ -87,21 +86,21 @@
                     <iframe class="gmap" style="width:98.2%;height:240px;" src=""></iframe>
 
                     <i class="icon-map-marker"></i> &nbsp;&nbsp;
-                    <i>Location</i>: 2536 Zamora Road, Missisipi, 74C
+                    <i>&nbsp;地&emsp;&emsp;址&nbsp;</i>: 2536 Zamora Road, Missisipi, 74C
 
                     <p>
 
                     </p>
 
                     <i class="icon-reorder"></i> &nbsp;
-                    <i>Hours</i>: Monday – Friday, 09:00 – 17:00
+                    <i>工作时间</i>&nbsp;: Monday – Friday, 09:00 – 17:00
 
                     <p>
 
                     </p>
 
                     <i class="icon-envelope"></i> &nbsp;
-                    <i>E-mail</i>: &nbsp;
+                    <i>&nbsp;邮&emsp;&emsp;箱&nbsp;</i>: &nbsp;
                     <a href="mailto:wowthemesnet@gmail.com">wowthemesnet@gmail.com</a>
 
                     <p>
@@ -136,6 +135,58 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            //没用
+            var HtmlUtil = {
+                /*1.用浏览器内部转换器实现html转码*/
+                htmlEncode: function (html) {
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)
+                    (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+                    //3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+                    var output = temp.innerHTML;
+                    temp = null;
+                    return output;
+                },
+                /*2.用浏览器内部转换器实现html解码*/
+                htmlDecode: function (text) {
+                    //1.首先动态创建一个容器标签元素，如DIV
+                    var temp = document.createElement("div");
+                    //2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)
+                    temp.innerHTML = text;
+                    //3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。
+                    var output = temp.innerText || temp.textContent;
+                    temp = null;
+                    return output;
+                },
+                /*3.用正则表达式实现html转码*/
+                htmlEncodeByRegExp: function (str) {
+                    var s = "";
+                    if (str.length == 0) return "";
+                    s = str.replace(/&/g, "&amp;");
+                    s = s.replace(/</g, "&lt;");
+                    s = s.replace(/>/g, "&gt;");
+                    s = s.replace(/ /g, "&nbsp;");
+                    s = s.replace(/\'/g, "&#39;");
+                    s = s.replace(/\"/g, "&quot;");
+                    return s;
+                },
+                /*4.用正则表达式实现html解码*/
+                htmlDecodeByRegExp: function (str) {
+                    var s = "";
+                    if (str.length == 0) return "";
+                    s = str.replace(/&amp;/g, "&");
+                    s = s.replace(/&lt;/g, "<");
+                    s = s.replace(/&gt;/g, ">");
+                    s = s.replace(/&nbsp;/g, " ");
+                    s = s.replace(/&#39;/g, "\'");
+                    s = s.replace(/&quot;/g, "\"");
+                    return s;
+                }
+            };
+
+
 
             $('#Send').click(function () {
 
@@ -211,15 +262,36 @@
 
                 }
 
-                $.post("post.php?" + $("#MYFORM").serialize(), {
+                // code validation
+
+                var codeVal = $("#code").val();
+
+                if (codeVal == '') {
+
+                    $("#message_error").html('');
+
+                    $("#captcha").after('<label class="error" id="name_error">请输入验证码.</label>');
+
+                    return false
+
+                }
+
+                else {
+
+                    $("#message_error").html('');
+
+                }
+
+
+                $.post("MassPost?" + $("#MYFORM").serialize(), {
 
                 }, function (response) {
 
-                    if (response == 1) {
+                    if (response.ErrorType == 1) {
 
                         $("#after_submit").html('');
 
-                        $("#Send").after('<div class="alert alert-success success" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>谢谢你!你的信息已经发送了.</div>');
+                        $("#tempid").after('<div class="alert alert-success success" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>' + response.MessageContent + '</div>');
 
                         change_captcha();
 
@@ -231,7 +303,7 @@
 
                         $("#after_submit").html('');
 
-                        $("#Send").after('<label class="error" id="after_submit">错误的验证码!刷新,再试一次.</label>');
+                        $("#tempid").after('<label class="alert alert-error" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>验证码错误!点击<a harf="javascript:;" id="refresh1">刷新</a>,再试一次.</label>');
 
                     }
 
@@ -248,10 +320,12 @@
                 change_captcha();
 
             });
+          
 
             function change_captcha() {
 
-                document.getElementById('captcha').src = "/Public/CodeImg?_r=" + Math.random();
+                document.getElementById('captcha').src = "/ContactUs/CodeImg?_r=" + Math.random();
+                document.getElementById('code').value = '';
 
             }
 
@@ -262,6 +336,10 @@
                 $("#email").val('');
 
                 $("#message").val('');
+
+                $("#code").val('');
+
+                $("#after_submit").
 
             }
 
@@ -288,3 +366,5 @@
 </body>
 
 </html>
+
+

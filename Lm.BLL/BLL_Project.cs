@@ -11,16 +11,16 @@ namespace Lm.BLL
     public class BLL_Project
     {
         #region dbContext
-        public DbHelperEfSql<td_Project> dbContext { get; set; }
+        public DbHelperEfSql<tb_Project> dbContext { get; set; }
         public BLL_Project()
         {
-            dbContext = new DbHelperEfSql<td_Project>();
+            dbContext = new DbHelperEfSql<tb_Project>();
         }
         #endregion
         #region  查询 Search Entity
 
         //查询所有部门
-        public IList<td_Project> GetListByAll()
+        public IList<tb_Project> GetListByAll()
         {
             return dbContext.SearchByAll();
         }

@@ -12,14 +12,16 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class td_TeamPeople
+    public partial class tb_ClientMessage
     {
         public int Id { get; set; }
-        public string People_En { get; set; }
-        public string People_Cn { get; set; }
-        public string People_Occupation { get; set; }
-        public string People_Specialty { get; set; }
-        public string People_Slogan { get; set; }
-        public string People_Profile { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Message { get; set; }
+        public System.DateTime SubmitDate { get; set; }
+        public bool IsDelete { get; set; }
+        public bool IsDisplay { get; set; }
+        public bool IsLook { get; set; }
+        public Nullable<System.DateTime> OperationDate { get; set; }
     }
 }

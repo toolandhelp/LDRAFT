@@ -11,16 +11,16 @@ namespace Lm.BLL
     public class BLL_Dictionary
     {
         #region dbContext
-        public DbHelperEfSql<td_Dictionary> dbContext { get; set; }
+        public DbHelperEfSql<tb_Dictionary> dbContext { get; set; }
         public BLL_Dictionary()
         {
-            dbContext = new DbHelperEfSql<td_Dictionary>();
+            dbContext = new DbHelperEfSql<tb_Dictionary>();
         }
         #endregion
         #region  查询 Search Entity
 
         //查询所有
-        public IList<td_Dictionary> GetListByAll()
+        public IList<tb_Dictionary> GetListByAll()
         {
             return dbContext.SearchByAll();
         }

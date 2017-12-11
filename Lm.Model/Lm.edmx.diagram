@@ -5,15 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="20dcf271f76f4941a21d7724001af3cb" Name="Diagram1">
-        <EntityTypeShape EntityType="lmModel.td_Menu_B" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lmModel.td_News" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lmModel.td_Project" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lmModel.td_TeamPeople" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lmModel.td_Menu_A" Width="1.5" PointX="5.375" PointY="4.75" />
-        <EntityTypeShape EntityType="lmModel.td_Articles" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="lmModel.td_Dictionary" Width="1.5" PointX="7.375" PointY="3.75" />
-        <EntityTypeShape EntityType="lmModel.td_CompanyInfo" Width="1.5" PointX="0.875" PointY="1.25" />
-        <EntityTypeShape EntityType="lmModel.Users" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="lmModel.Sys_Users" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lmModel.tb_Articles" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lmModel.tb_ClientMessage" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="lmModel.tb_CompanyInfo" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lmModel.tb_Dictionary" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="lmModel.tb_Menu_A" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lmModel.tb_Menu_B" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="lmModel.tb_News" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="lmModel.tb_Project" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lmModel.tb_TeamPeople" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="lmModel.Sys_LOG" Width="1.5" PointX="8.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
