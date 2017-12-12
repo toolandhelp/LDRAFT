@@ -19,17 +19,18 @@
 
     <!-- Le styles -->
 
-    <link href="~/Content/bootstrap.css?v=1.1.1" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
 
     <link href="~/Content/style.css?v=1.1.1" rel="stylesheet">
 
-    <link href="~/Content/camera.css?v=1.1.1" rel="stylesheet">
+    <link href="~/Content/camera.css" rel="stylesheet">
 
-    <link href="~/Content/icons.css?v=1.1.1" rel="stylesheet">
+    <!--图标-->
+    <link href="~/Content/icons.css?v_1.1.1" rel="stylesheet">
 
-    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css?v=1.1.1" media="screen" />
+    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css" media="screen" />
 
-    <link href="~/Content/bootstrap-responsive.css?v=1.1.1" rel="stylesheet">
+    <link href="~/Content/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -99,7 +100,7 @@
                                     <script type="text/javascript">
                                         $(document).ready(function () {
                                             $.ajax({
-                                                url: '/Public/TopNav',
+                                                url: 'TopNav',
                                                 type: 'POST',
                                                 async: false,
                                                 dataType: "json",
@@ -193,72 +194,6 @@
             <iframe id="main" name="main" frameborder="0" width="100%" scrolling="no" src="/Home/Content"></iframe>
         </div>
 
-        <!--设置iframe自动高度-->
-        <script type="text/javascript">
-
-            //$(function () {
-            //    initWindow();
-            //});
-
-            //$(window).resize(function () {
-            //    InitFrameSize();
-            //    setTimeout(setFontSize(), 200);
-            //});
-
-            //function setFontSize() {
-            //    document.documentElement.style.fontSize = window.innerWidth / 13.6 + 'px';
-            //}
-            //function InitFrameSize() {
-            //    var contentHeight = $(document).find("body").height();
-            //    var frame = $("#main", window.parent.document);
-            //    var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
-            //    frame.height(initHeight > contentHeight ? initHeight : contentHeight + 30);
-            //}
-
-            //var browserVersion = window.navigator.userAgent.toUpperCase();
-            //var isOpera = browserVersion.indexOf("OPERA") > -1 ? true : false;
-            //var isFireFox = browserVersion.indexOf("FIREFOX") > -1 ? true : false;
-            //var isChrome = browserVersion.indexOf("CHROME") > -1 ? true : false;
-            //var isSafari = browserVersion.indexOf("SAFARI") > -1 ? true : false;
-            //var isIE = (!!window.ActiveXObject || "ActiveXObject" in window);
-            //var isIE9More = (! -[1,] == false);
-            //function reinitIframe(iframeId, minHeight) {
-            //    try {
-            //        var iframe = document.getElementById(iframeId);
-            //        var bHeight = 0;
-            //        if (isChrome == false && isSafari == false)
-            //            bHeight = iframe.contentWindow.document.body.scrollHeight;
-
-            //        var dHeight = 0;
-            //        if (isFireFox == true)
-            //            dHeight = iframe.contentWindow.document.documentElement.offsetHeight + 2;
-            //        else if (isIE == false && isOpera == false)
-            //            dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-            //        else if (isIE == true && isIE9More) {//ie9+
-            //            var heightDeviation = bHeight - eval("window.IE9MoreRealHeight" + iframeId);
-            //            if (heightDeviation == 0) {
-            //                bHeight += 3;
-            //            } else if (heightDeviation != 3) {
-            //                eval("window.IE9MoreRealHeight" + iframeId + "=" + bHeight);
-            //                bHeight += 3;
-            //            }
-            //        }
-            //        else//ie[6-8]、OPERA
-            //            bHeight += 3;
-
-            //        var height = Math.max(bHeight, dHeight);
-            //        if (height < minHeight) height = minHeight;
-            //        iframe.style.height = height + "px";
-            //    } catch (ex) { }
-            //}
-            //function startInit(iframeId, minHeight) {
-            //    eval("window.IE9MoreRealHeight" + iframeId + "=0");
-            //    window.setInterval("reinitIframe('" + iframeId + "'," + minHeight + ")", 100);
-            //}
-
-            //startInit('main', 300);
-
-        </script>
         <!-- FOOTER BEGIN
 
         ================================================== -->
@@ -283,15 +218,9 @@
 
                         <hr>
 
-                        <p>
-
-                            Introducing a premium HTML5 & CSS3 template for multipurpose use. Responsive layout, professional design & lots of features.
-
-                        </p>
-
-                        <p>
-
-                            Made with love by <a href="http://www.ldraft.com">LDRAFT.COM</a> .
+                        <p style="text-indent:25px;">
+                    
+                            @ViewBag.CInfoD
 
                         </p>
 
@@ -377,32 +306,55 @@
 
                             <div class="alert alert-success">
 
-                                <button type="button" class="close" data-dismiss="alert">×</button> Your message has been sent. Thank you!
+                                <button type="button" class="close" data-dismiss="alert">×</button> 你的信息已经发送了。谢谢你！
 
                             </div>
 
                         </div>
+                        <div id="done_warning" style="display:none;">
 
-                        <form method="post" action="contact.php" id="contactform">
+                            <div class="alert alert-warning warning">
+
+                            <button type="button" class="close" data-dismiss="alert">×</button>信息发送失败!每天只允许发送<span style='color:red;'>5条</span>问题.
+
+                            </div>
+                        </div>
+
+                        <div id="done_error" style="display:none;">
+                            <div class="alert alert-error error">
+                               <button type="button" class="close" data-dismiss="alert">×</button>验证码错误!点击[<span harf="javascript:;" id="refresh">验证码</span>],刷新再试一次.
+                            </div>
+                        </div>
+
+                        <form method="post" action="/Home/Question" id="contactform">
 
                             <div class="form">
 
                                 <div class="controls controls-row">
 
-                                    <input class="span6" type="text" name="name" placeholder="Name">
+                                    <input class="span6" type="text" maxlength="50" name="name" placeholder="姓名">
 
-                                    <input class="span6" type="text" name="email" placeholder="E-mail">
+                                    <input class="span6" type="text" maxlength="25" name="email" placeholder="邮箱">
 
                                 </div>
 
                                 <div class="controls">
 
-                                    <textarea class="span12" name="comment" rows="4" placeholder="消息"></textarea>
+                                    <textarea style="resize:none" class="span12" name="comment" maxlength="250" rows="4" placeholder="消息"></textarea>
 
                                 </div>
 
-                                <input type="submit" id="submit" class="btn" value="发送">
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <!--<input class="span2" type="text" name="Qcode" maxlength="4" placeholder="验证码">-->
+                                        <input class="col-md-2" type="text" name="Qcode" id="Qcode" maxlength="4" placeholder="验证码">
+                                        <img src="" id="imgcode" alt="看不清，换一张" title="看不清，换一张" style="cursor:pointer;margin-bottom:10px;" />
+                                    </div>
+                                    <div class="col-md-4">
 
+                                        <input type="submit" id="submit" class="btn" value="发送">
+                                    </div>
+                                </div>
                             </div>
 
                         </form>
@@ -429,7 +381,7 @@
 
                         <p class="smaller">
 
-                            <span class="copyright">© </span> Copyright 2013 Biscaya. Be nice. Collect from
+                            <span class="copyright">© </span> @ViewBag.Copyright
 
                         </p>
 
@@ -443,15 +395,66 @@
 
                             <ul class="footermenu">
 
-                                <li><a href="#">Home</a></li>
+                                @*<script type="text/javascript">
+                                     $(document).ready(function () {
+                                         $.ajax({
+                                             url: 'BottomNav',
+                                             type: 'POST',
+                                             async: false,
+                                             dataType: "json",
+                                             beforeSend: function () {
+                                                 $(".footermenu").html("<div style='width:120px;margin: 0 auto;color:#fff'> <img src= '/Images/loading.gif' width= '32px' height= '32px' align= 'absmiddle' /> 正在加载...</div > ");
+                                             },
+                                             ContentType: "application/json;charset=utf-8",
+                                             success: function (responseList) {
+                                                 var buf = [];
+                                                 for (var i = 0; i < responseList.length; i++) {
+                                                     var modelParent = responseList[i];
 
-                                <li><a href="#">Work</a></li>
+                                                     if (modelParent.Pid === "0" && modelParent.Url != "#") {
+                                                         buf.push("<li><a href=" + modelParent.Url + " target=\"main\">" + modelParent.Title + "</a></li>");
+                                                         buf.push("<li class=\"divider-vertical\"></li>");
+                                                     } else {
+                                                         var childList = new Array();
+                                                         var tempchildi = 0;
+                                                         for (var k = 0; k < responseList.length; k++) {
+                                                             if (responseList[k].Pid === "0") continue;
+                                                             if (responseList[k].Pid === modelParent.Id) {
+                                                                 childList[tempchildi] = responseList[k];
+                                                                 tempchildi++;
+                                                             }
+                                                         }
 
-                                <li><a href="#">Pages</a></li>
+                                                         if (modelParent.Url == "#") {
+                                                             buf.push("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + modelParent.Title + "<b class=\"caret\"></b></a>");
+                                                         }
 
-                                <li><a href="#">Blog</a></li>
+                                                         if (childList.length > 0) {
+                                                             buf.push("<ul class=\"dropdown-menu js-activated\" style=\"display: none;\">");
+                                                             for (var j = 0; j < childList.length; j++) {
+                                                                 buf.push("<li> <a href=" + childList[j].Url + "  target=\"main\">" + childList[j].Title + "</a></li>");
+                                                             }
+                                                         }
+                                                         buf.push("</ul></li>");
+                                                     }
+                                                     //buf.push("<li class=\"divider-vertical\"></li>");
+                                                 }
 
-                                <li><a href="#">Contact</a></li>
+                                                 // buf.push("<li class=\"divider-vertical\"></li>");
+                                                 $("#nav").html(buf.join(""));
+                                                 $("#nav").find("li.dropdown").after("<li class=\"divider-vertical\"></li>");
+                                             },
+                                             error: function (xmlHttpRequest, textStatus, errorThrown) {
+                                                 MISSY.iDebugAjaxError(xmlHttpRequest, textStatus, errorThrown);
+                                                 $("#nav").html("数据加载失败,请稍后再试.");
+                                             }
+
+
+                                         });
+                                     });
+                                </script>*@
+
+
 
                             </ul>
 
@@ -483,7 +486,9 @@
     ================================================== -->
     <!-- js放置在文档的末尾，这样页面加载更快-->
 
-    <script src="~/js/jquery.js"></script>
+    <!--上面有jQuery v1.11.3-->
+    <!--以下版本jQuery v1.8.3-->
+    <!--<script src="~/js/jquery.js"></script>-->
 
     <script src="~/js/bootstrap.js"></script>
 

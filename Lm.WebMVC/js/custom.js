@@ -1,4 +1,4 @@
-//////----TO TOP---////////
+﻿//////----TO TOP---////////
 jQuery(document).ready(function ($) {
 jQuery('.totop').click(function(){
 	jQuery('html, body').animate({ scrollTop: 0 }, "slow");
@@ -24,17 +24,38 @@ $('.dropdown-submenu').hover(function() {
 });	
 
 	
-//////CONTACT FORM VALIDATION
+//////CONTACT FORM VALIDATION //问题提交
 jQuery(document).ready(function ($) {
-	
+
+    $("#refresh").click(function () { ClickValidateCode(); });
+
+   //问题图片验证码
+    $("#imgcode").click();
+    $("#imgcode").click(function () { ClickValidateCode(); }).click();
+    //验证码
+    function ClickValidateCode() {
+        $('.done').hide(); //成功
+        $('#done_warning').hide(); //警告
+        $('#done_error').hide(); //错误
+
+        $("#Qcode").val("");
+        $("#imgcode").prop('src', '/Home/CodeImg?_r=' + Math.random());
+    }
+
 	//if submit button is clicked
-	$('#submit').click(function () {		
-		
+    $('#submit').click(function () {	
+
+        $('.done').hide(); //成功
+        $('#done_warning').hide(); //警告
+        $('#done_error').hide(); //错误
+        //$("after_submit").remove();
+
 		//Get the data from all the fields
 		var name = $('input[name=name]');
 		var email = $('input[name=email]');
 		var regx = /^([a-z0-9_\-\.])+\@([a-z0-9_\-\.])+\.([a-z]{2,4})$/i;
-		var comment = $('textarea[name=comment]');
+        var comment = $('textarea[name=comment]');
+        var qcode = $('input[name=Qcode]');
 		var returnError = false;
 		
 		//Simple validation to make sure user entered something
@@ -60,15 +81,20 @@ jQuery(document).ready(function ($) {
 			comment.addClass('error');
 			returnError = true;
 		} else comment.removeClass('error');
-		
+
+        if (qcode.val() == '') {
+            qcode.addClass('error');
+            returnError = true;
+        } else qcode.removeClass('error');
+
 		// Highlight all error fields, then quit.
 		if(returnError == true){
 			return false;	
 		}
 		
 		//organize the data
-		
-		var data = 'name=' + name.val() + '&email=' + email.val() + '&comment='  + encodeURIComponent(comment.val());
+
+        var data = 'name=' + name.val() + '&email=' + email.val() + '&comment=' + encodeURIComponent(comment.val()) + '&qcode=' + qcode.val();
 
 		//disabled all the text fields
 		$('.text').attr('disabled','true');
@@ -79,10 +105,13 @@ jQuery(document).ready(function ($) {
 		//start the ajax
 		$.ajax({
 			//this is the php file that processes the data and sends email
-			url: "contact.php",	
+            url: "/Home/Question",	
 			
 			//GET method is used
-			type: "GET",
+            type: "POST",
+
+            //同步
+            async: false,
 
 			//pass the data			
 			data: data,		
@@ -91,17 +120,37 @@ jQuery(document).ready(function ($) {
 			cache: false,
 			
 			//success
-			success: function (html) {				
-				//if contact.php returned 1/true (send mail success)
-				if (html==1) {
-				
-					//show the success message
-					$('.done').fadeIn('slow');
-					
-					$(".form").find('input[type=text], textarea').val("");
-					
-				//if contact.php returned 0/false (send mail failed)
-				} else alert('Sorry, unexpected error. Please try again later.');				
+            success: function (response) {
+                //同一个人提交5遍
+                if (response.ErrorType == 2) {
+                    $('.done').hide(); //成功
+                    $('#done_warning').show(); //警告
+                    $('#done_error').hide(); //错误
+                    return;
+                }
+				//if returned 1/true (send mail success)
+                if (response.ErrorType == 1) {
+
+                    $("after_submit").remove();
+                    $("#imgcode").prop('src', '/Home/CodeImg?_r=' + Math.random());
+                    //show the success message
+                    // $('.done').fadeIn('slow');
+                    $('.done').show(); //成功
+                    $('#done_warning').hide(); //警告
+                    $('#done_error').hide(); //错误
+
+                    $(".form").find('input[type=text], textarea').val("");
+
+                    return;
+
+                    //if returned 0/false (send mail failed)
+                } else {
+                    $('.done').hide(); //成功
+                    $('#done_warning').hide(); //警告
+                    $('#done_error').show(); //错误
+                    //$("after_submit").remove();
+                    //$("#done").after('<label class="alert alert-error" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>验证码错误!点击<a harf="javascript:;" id="refresh">验证码</a>,刷新再试一次.</label>');
+                }
 			}		
 		});
 		

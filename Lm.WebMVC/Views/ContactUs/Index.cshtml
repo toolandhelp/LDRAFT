@@ -64,17 +64,20 @@
 
                     <input name="email" size="30" type="text" id="email" class="span12" maxlength="25" placeholder="邮箱地址">
 
-                    <textarea id="message" name="message" class="span12" placeholder="信息" maxlength="250" rows="8"></textarea>
+                    <textarea style="resize:none" id="message" name="message" class="span12" placeholder="信息" maxlength="250" rows="8"></textarea>
 
                     <input name="code" type="text" id="code" placeholder="输入验证码" maxlength="4" class="top10">
-                    <img src="~/img/refresh.jpg" width="25" alt="" id="refresh" />
+                    <img src="~/img/refresh.jpg" width="25" alt="刷新" title="刷新" id="refresh" />
                     <img src="~/ContactUs/CodeImg" alt="" id="captcha" />
 
                     <br />
 
                     <input value="发送" type="submit" id="Send" class="btn btn-primary top10">
 
-                    <span id="tempid"></span>
+                    <!--<label class="alert alert-success success" id="after_submit_success" style="display:none;"><button type="button" class="close" data-dismiss="alert">×</button>谢谢你!你的信息已经发送了.</label>
+
+                    <label class="alert alert-error" id="after_submit_error" style="display:none;"><button type="button" class="close" data-dismiss="alert">×</button>验证码错误!点击<a harf="javascript:;" onclick="change_captcha();" id="refresh">刷新</a>,再试一次.</label>-->
+
                 </form>
 
             </div>
@@ -83,17 +86,17 @@
 
                 <div class="box3">
 
-                    <iframe class="gmap" style="width:98.2%;height:240px;" src=""></iframe>
+                    <iframe class="gmap" style="width:98.2%;height:240px;" src="~/UploadPic/map.png"></iframe>
 
                     <i class="icon-map-marker"></i> &nbsp;&nbsp;
-                    <i>&nbsp;地&emsp;&emsp;址&nbsp;</i>: 2536 Zamora Road, Missisipi, 74C
+                    <i>&nbsp;地&emsp;&emsp;址&nbsp;</i>: @ViewBag.Adderss
 
                     <p>
 
                     </p>
 
                     <i class="icon-reorder"></i> &nbsp;
-                    <i>工作时间</i>&nbsp;: Monday – Friday, 09:00 – 17:00
+                    <i>工作时间</i>&nbsp;: @ViewBag.WorkTime
 
                     <p>
 
@@ -101,7 +104,7 @@
 
                     <i class="icon-envelope"></i> &nbsp;
                     <i>&nbsp;邮&emsp;&emsp;箱&nbsp;</i>: &nbsp;
-                    <a href="mailto:wowthemesnet@gmail.com">wowthemesnet@gmail.com</a>
+                    <a href="mailto:@ViewBag.Email">@ViewBag.Email</a>
 
                     <p>
 
@@ -128,7 +131,8 @@
 
     <script src="~/js/plugins.js"></script>
 
-    <script src="~/js/custom.js"></script>
+    <!--只需要在ifame外面调用即可-->
+    <!--<script src="~/js/custom.js"></script>-->
 
     <!-- CALL CONTACT FORM -->
 
@@ -268,9 +272,9 @@
 
                 if (codeVal == '') {
 
-                    $("#message_error").html('');
+                    $("#code_error").html('');
 
-                    $("#captcha").after('<label class="error" id="name_error">请输入验证码.</label>');
+                    $("#captcha").after('<label class="error" id="code_error">请输入验证码.</label>');
 
                     return false
 
@@ -278,7 +282,7 @@
 
                 else {
 
-                    $("#message_error").html('');
+                    $("#code_error").html('');
 
                 }
 
@@ -287,23 +291,46 @@
 
                 }, function (response) {
 
+                    if (response.ErrorType == 2)
+                    {
+                        $("#code_error").remove();
+
+                        $("#after_submit").remove();
+
+                        $("#Send").after('<div class="alert alert-warning warning" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>' + response.MessageContent + '</div>');
+
+                        return;
+                    }
+
                     if (response.ErrorType == 1) {
 
-                        $("#after_submit").html('');
+                        //$("#after_submit_success").show();
+                        //$("#after_submit_error").hide();
 
-                        $("#tempid").after('<div class="alert alert-success success" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>' + response.MessageContent + '</div>');
+                        $("#code_error").remove();
+
+                        $("#after_submit").remove();
+
+                        $("#Send").after('<div class="alert alert-success success" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>' + response.MessageContent + '</div>');
 
                         change_captcha();
 
                         clear_form();
 
+                        return;
+
                     }
 
                     else {
 
-                        $("#after_submit").html('');
+                        //$("#after_submit_success").hide();
+                        //$("#after_submit_error").show();
 
-                        $("#tempid").after('<label class="alert alert-error" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>验证码错误!点击<a harf="javascript:;" id="refresh1">刷新</a>,再试一次.</label>');
+                        $("#code_error").remove();
+
+                        $("#after_submit").remove();
+
+                        $("#Send").after('<label class="alert alert-error" id="after_submit"><button type="button" class="close" data-dismiss="alert">×</button>验证码错误!点击<a harf="javascript:;" id="refresh">刷新</a>,再试一次.</label>');
 
                     }
 
@@ -316,11 +343,15 @@
             // refresh captcha
 
             $('img#refresh').click(function () {
-
+                $("#after_submit").remove();
                 change_captcha();
 
             });
-          
+
+            $("#refresh").on("click", function () {
+                change_captcha();
+
+            });
 
             function change_captcha() {
 
@@ -338,8 +369,6 @@
                 $("#message").val('');
 
                 $("#code").val('');
-
-                $("#after_submit").
 
             }
 

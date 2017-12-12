@@ -15,46 +15,47 @@ namespace Lm.WebMVC.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            #region 项目
-            StringBuilder sbRP = new StringBuilder();
-            var cBll = new BLL_Project();
-            var list = cBll.GetListByAll().Skip(4).Take(9).ToList();
-            if (null != list)
-            {
-                GetTake5Work(ref sbRP, list);
-            }
+            //#region 项目
+            //StringBuilder sbRP = new StringBuilder();
+            //var cBll = new BLL_Project();
+            //var list = cBll.GetListByAll().Skip(4).Take(9).ToList();
+            //if (null != list)
+            //{
+            //    GetTake5Work(ref sbRP, list);
+            //}
 
-            ViewBag.RecentProjects = sbRP;
-            #endregion
+            //ViewBag.RecentProjects = sbRP;
+            //#endregion
 
-            #region 最新新闻
-            StringBuilder sbNews = new StringBuilder();
-            var NewsBll = new BLL_Articles();
-            //数据库 17：新闻
-            var Newslist = NewsBll.GetListByAll().Where(o => o.ArticlesType == 17).Take(4).ToList();
-            GetTop4News(ref sbNews, Newslist);
-            ViewBag.HotNews = sbNews;
-            #endregion
+            //#region 最新新闻
+            //StringBuilder sbNews = new StringBuilder();
+            //var NewsBll = new BLL_Articles();
+            ////数据库 17：新闻
+            //var Newslist = NewsBll.GetListByAll().Where(o => o.ArticlesType == 17).Take(4).ToList();
+            //GetTop4News(ref sbNews, Newslist);
+            //ViewBag.HotNews = sbNews;
+            //#endregion
 
-            #region 业务范围(服务范围) 
-            //Fid:8 都是服务范围 共5个取4个
-            StringBuilder sbService = new StringBuilder();
-            var ServiceBll = new BLL_Dictionary();
-            var Servicelist = ServiceBll.GetListByAll().Where(o => o.FId == 8).Take(4).OrderByDescending(o => o.Sort).ToList();
-            Get4Service(ref sbService, Servicelist);
-            ViewBag.Service = sbService;
-            #endregion
+            //#region 业务范围(服务范围) 
+            ////Fid:8 都是服务范围 共5个取4个
+            //StringBuilder sbService = new StringBuilder();
+            //var ServiceBll = new BLL_Dictionary();
+            //var Servicelist = ServiceBll.GetListByAll().Where(o => o.FId == 8).Take(4).OrderByDescending(o => o.Sort).ToList();
+            //Get4Service(ref sbService, Servicelist);
+            //ViewBag.Service = sbService;
+            //#endregion
 
             #region 首页公司信息
             string sTel = Config.CsTel;
-            string sAdder = Config.sAdder;
+            string sAdder = Config.Adder;
             string CInfoD_T = Config.CInfoD_T;
             string CInfoD = Config.CInfoD;
             string CompanyName = Config.CompanyName;
+            string Copyright = Config.Copyright;
 
             var CInfoBll = new BLL_CompanyInfo();
-            tb_CompanyInfo CInfo = new tb_CompanyInfo();
-            CInfo = CInfoBll.GetTopCInfo();
+            var  CInfo = new tb_CompanyInfo();
+            CInfo = CInfoBll.GetListByAll().OrderByDescending(o=>o.Id).FirstOrDefault();
 
 
             if (CInfo != null)
@@ -63,13 +64,16 @@ namespace Lm.WebMVC.Controllers
                 sAdder = CInfo.Company_Address;
                 CInfoD_T = CInfo.Company_Description_T;
                 CInfoD = CInfo.Company_description;
+                CompanyName = CInfo.Company_Name;
+                Copyright = CInfo.Company_copyright;
+
             }
             ViewBag.Tel = sTel;
             ViewBag.Address = sAdder;
             ViewBag.CInfoD = CInfoD;
             ViewBag.CInfoD_T = CInfoD_T;
             ViewBag.CompanyName = CompanyName;
-
+            @ViewBag.Copyright = Copyright;
             #endregion
             return View();
         }
@@ -77,7 +81,6 @@ namespace Lm.WebMVC.Controllers
         public ActionResult Content()
         {
           
-
             return View();
         }
 
@@ -318,6 +321,113 @@ namespace Lm.WebMVC.Controllers
                                     content = o.News_Content,
                                 };
             return Json(sReturnModel);
+        }
+
+        [ValidateInput(false)]
+        public JsonResult Question()
+        {
+            //0:失败；1:成功；2:数量限制
+            var sReturnModel = new ReturnMessageModel();
+
+            string name = RequestParameters.Pstring("name");
+            string email = RequestParameters.Pstring("email");
+            string message = RequestParameters.Pstring("comment");
+            string txtValicode = RequestParameters.Pstring("qcode");
+
+            try
+            {
+                if (txtValicode != Session["Qcaptcha"].ToString())
+                {
+                    sReturnModel.ErrorType = 0;
+                    sReturnModel.MessageContent = "验证码错误!刷新,再试一次.";
+                    return Json(sReturnModel);
+                }
+            }
+            catch (Exception)
+            {
+                sReturnModel.ErrorType = 0;
+                sReturnModel.MessageContent = "验证码错误!刷新,再试一次.";
+                return Json(sReturnModel);
+            }
+
+            var cBll = new Bll_ClientMessage();
+            var model = new tb_ClientMessage();
+            model.Name = HttpUtility.HtmlEncode(name);
+            model.Email = HttpUtility.HtmlEncode(email);
+            model.Message = HttpUtility.HtmlEncode(message);
+            model.MessType = true; //0:问题信息
+            model.SubmitDate = System.DateTime.Now;
+
+            //当前问题今天所发的记录数
+            var list = cBll.GetListByAll().Where(o => o.Email == email &&
+            o.SubmitDate.ToString("yyyy-MM-dd") == System.DateTime.Now.ToString("yyyy-MM-dd") &&
+            o.MessType == true).Count();
+
+            if (list >= 5)
+            {
+                sReturnModel.ErrorType = 2;
+                sReturnModel.MessageContent = "信息发送失败!每天只允许发送<span style='color:red;'>5条</span>问题.";
+                return Json(sReturnModel);
+            }
+
+
+            if (cBll.AddOrUpdate(model))
+            {
+                sReturnModel.ErrorType = 1;
+                sReturnModel.MessageContent = "谢谢你!你的信息已经发送了.";
+
+            }
+            else
+            {
+                sReturnModel.ErrorType = 0;
+                sReturnModel.MessageContent = "信息发送失败!请刷新页面重试.";
+            }
+
+            return Json(sReturnModel);
+        }
+
+        /// <summary>
+        /// 验证码(发送信息)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CodeImg()
+        {
+            var itemValidateCode = new CommonLib.ValidateCode();
+            string code = itemValidateCode.CreateValidateCode(4);
+            Session["Qcaptcha"] = code;
+            byte[] bytes = itemValidateCode.CreateValidateGraphic(code);
+
+            return File(bytes, @"image/jpg");
+        }
+
+        /// <summary>
+        /// 菜单导航
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult TopNav()
+        {
+
+            var cBll = new BLL_Menu();
+            var list = cBll.GetMenu_B_ListByAll().Where(o => o.menu_Stage == (int)StageMode.Normal).ToList();
+
+            if (list != null)
+            {
+                return Json(list.Select(itemNode => new TreeModel
+                {
+                    Id = itemNode.menu_Code,
+                    Pid = itemNode.menu_FatherId,
+                    Title = itemNode.menu_Name,
+                    Target = itemNode.menu_Image,
+                    Url = itemNode.menu_Link
+
+                }));
+            }
+            return Json("[]");
+        }
+
+        public JsonResult BottomNav()
+        {
+            return Json(true);
         }
     }
 }

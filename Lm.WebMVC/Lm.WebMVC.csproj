@@ -163,7 +163,6 @@
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +233,7 @@
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\camera.css" />
+    <Content Include="Content\font-awesome_temp.css" />
     <Content Include="Content\fonts\OpenSans-Bold-webfont.svg" />
     <Content Include="Content\fonts\OpenSans-Light-webfont.svg" />
     <Content Include="Content\fonts\OpenSans-Regular-webfont.svg" />
@@ -297,6 +297,7 @@
     <Content Include="demo\js\styleswitch.js" />
     <Content Include="demo\js\switcher.js" />
     <Content Include="favicon.ico" />
+    <Content Include="font\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\abt-1.jpg" />
     <Content Include="images\abt-2.jpg" />
@@ -1021,7 +1022,13 @@
     <Content Include="Content\fonts\Pacifico-webfont.eot" />
     <Content Include="Content\fonts\Pacifico-webfont.ttf" />
     <Content Include="Content\fonts\Pacifico-webfont.woff" />
+    <Content Include="font\fontawesome-webfont.eot" />
+    <Content Include="font\fontawesome-webfont.ttf" />
+    <Content Include="font\fontawesome-webfont.woff" />
+    <Content Include="font\fontawesome-webfont.woff2" />
+    <Content Include="font\FontAwesome.otf" />
     <None Include="Scripts\_references.js" />
+    <Content Include="UploadPic\map.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1034,7 +1041,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\ContactUs\Index.cshtml" />
-    <Content Include="Views\Public\Index.cshtml" />
     <Content Include="Views\Home\Content.cshtml" />
     <Content Include="Views\Home\Index_1207bak.cshtml" />
   </ItemGroup>

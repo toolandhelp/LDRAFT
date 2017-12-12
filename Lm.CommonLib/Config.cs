@@ -116,7 +116,7 @@ namespace Lm.CommonLib
         /// <summary>
         /// 公司地址 
         /// </summary>
-        public static string sAdder
+        public static string Adder
         {
             get
             {
@@ -124,7 +124,32 @@ namespace Lm.CommonLib
                 return string.IsNullOrEmpty(sAdder) ? "上海市 ， 南京东路 ， 开心花园123弄123号" : sAdder.Trim();
             }
         }
+        /// <summary>
+        /// 工作时间
+        /// </summary>
+        public static string WorkTime
+        {
+            get
+            {
+                string sWorkTime = System.Configuration.ConfigurationManager.AppSettings["WorkTime"];
+                return string.IsNullOrEmpty(sWorkTime) ? "星期一 - 星期五，09：00 - 06：00" : sWorkTime.Trim();
+            }
 
+        }
+
+
+        public static string Emails
+        {
+            get
+            {
+                string sEmail = System.Configuration.ConfigurationManager.AppSettings["Email"];
+                return string.IsNullOrEmpty(sEmail) ? "88888888@qq.com" : sEmail.Trim();
+            }
+        }
+
+        /// <summary>
+        /// 简介
+        /// </summary>
         public static string CInfoD_T
         {
             get
@@ -134,21 +159,39 @@ namespace Lm.CommonLib
             }
         }
 
+        /// <summary>
+        /// 公司描述
+        /// </summary>
         public static string CInfoD
         {
             get
             {
-                string CInfoD = System.Configuration.ConfigurationManager.AppSettings["InitCInfoD"];
-                return string.IsNullOrEmpty(CInfoD) ? "无" : CInfoD.Trim();
+                string sCInfoD = System.Configuration.ConfigurationManager.AppSettings["InitCInfoD"];
+                return string.IsNullOrEmpty(sCInfoD) ? "无" : sCInfoD.Trim();
             }
         }
 
+        /// <summary>
+        /// 公司名称 （title用） 
+        /// </summary>
         public static string CompanyName
         {
             get
             {
-                string CompanyName = System.Configuration.ConfigurationManager.AppSettings["CompanyName"];
-                return string.IsNullOrEmpty(CompanyName) ? " " : CompanyName.Trim();
+                string sCompanyName = System.Configuration.ConfigurationManager.AppSettings["CompanyName"];
+                return string.IsNullOrEmpty(sCompanyName) ? " " : sCompanyName.Trim();
+            }
+        }
+
+        /// <summary>
+        /// 版权信息
+        /// </summary>
+        public static string Copyright
+        {
+            get
+            {
+                string sCopyright = System.Configuration.ConfigurationManager.AppSettings["Copyright"];
+                return string.IsNullOrEmpty(sCopyright) ? " " : sCopyright.Trim();
             }
         }
 

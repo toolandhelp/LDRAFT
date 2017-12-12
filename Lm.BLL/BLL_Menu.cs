@@ -25,7 +25,7 @@ namespace Lm.BLL
             return dbContext.SearchBySingle(c => c.menu_Id == Id);
         }
 
-        //查询所有部门
+        //查询所有
         public IList<tb_Menu_B> GetMenu_B_ListByAll()
         {
             return dbContext.SearchByAll();

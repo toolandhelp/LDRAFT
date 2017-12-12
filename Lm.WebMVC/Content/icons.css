@@ -1455,11 +1455,13 @@ a .icon-flip-vertical:before {
   content: "\f18b";
 }
 .icon-wechat:before {
-    content: "\f19a";
+    content: "\f1d7";
 }
 .icon-qq:before {
-    content: "\f19b";
+    content: "\f1d6";
 }
+
+/*想要添加图标，可根据font-awesome_temp.css里的 .fa-qq 获取  content: "\f1d6"; */
 
 .rating{unicode-bidi:bidi-override;direction:rtl;font-size:30px;}.rating span.star{font-family:FontAwesome;font-weight:normal;font-style:normal;display:inline-block;}.rating span.star:hover{cursor:pointer;}
 .rating span.star:before{content:"\f006";padding-right:5px;color:#999999;}

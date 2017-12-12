@@ -3250,6 +3250,14 @@ label.success {
     width: 200px;
 }
 
+label.warning {
+    color: #f89406;
+    font-size: 12px;
+    margin: 0 0 10px;
+    font-style: italic;
+    width: 200px;
+}
+
 .gmap {
     background: white;
     border: 1px solid #eee;

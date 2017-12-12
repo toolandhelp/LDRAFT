@@ -21,5 +21,9 @@ namespace Lm.Model
         public string Company_Email { get; set; }
         public string Company_Description_T { get; set; }
         public string Company_description { get; set; }
+        public string Company_WorkTime { get; set; }
+        public string Company_AddersImgUrl { get; set; }
+        public string Company_LogoUrl { get; set; }
+        public string Company_copyright { get; set; }
     }
 }

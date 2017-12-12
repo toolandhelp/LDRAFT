@@ -31,9 +31,9 @@ namespace Lm.BLL
         /// 获取公司信息
         /// </summary>
         /// <returns></returns>
-        public tb_CompanyInfo GetTopCInfo()
+        public tb_CompanyInfo GetTopCInfo(int iid)
         {
-            return dbContext.SearchBySingle(o => o.Id == 1);
+            return dbContext.SearchBySingle(o => o.Id == iid);
         }
 
         //public IList<ts_Dept> GetEnabledListByParent(string parentID)

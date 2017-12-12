@@ -25,5 +25,6 @@ namespace Lm.Model
         public Nullable<int> menu_Sort { get; set; }
         public int menu_Stage { get; set; }
         public string menu_Note { get; set; }
+        public string menu_Link_temp { get; set; }
     }
 }

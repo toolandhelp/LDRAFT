@@ -23,5 +23,6 @@ namespace Lm.Model
         public bool IsDisplay { get; set; }
         public bool IsLook { get; set; }
         public Nullable<System.DateTime> OperationDate { get; set; }
+        public Nullable<bool> MessType { get; set; }
     }
 }

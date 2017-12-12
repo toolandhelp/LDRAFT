@@ -15,20 +15,41 @@ namespace Lm.WebMVC.Controllers
         // GET: ContactUs
         public ActionResult Index()
         {
+
+            #region 联系方式
+            string sAdder = Config.Adder;
+            string sWorkTime = Config.WorkTime;
+            string sEmail = Config.Emails;
+
+            var CInfoBll = new BLL_CompanyInfo();
+            var  model = new tb_CompanyInfo();
+            model = CInfoBll.GetListByAll().FirstOrDefault();
+            if (model != null)
+            {
+                sAdder = model.Company_Address;
+                sWorkTime = model.Company_WorkTime;
+                sEmail = model.Company_Email;
+            }
+
+            ViewBag.Adderss = sAdder;
+            ViewBag.WorkTime = sWorkTime;
+            ViewBag.Email = sEmail;
+
+            #endregion
+
             return View();
         }
 
         [ValidateInput(false)]
         public JsonResult MassPost()
         {
+            //0:失败；1:成功；2:数量限制
             var sReturnModel = new ReturnMessageModel();
 
             string name = RequestParameters.Pstring("name");
             string email = RequestParameters.Pstring("email");
             string message = RequestParameters.Pstring("message");
             string txtValicode = RequestParameters.Pstring("code");
-
-            string temp = Session["captcha"].ToString();
 
             if (txtValicode != Session["captcha"].ToString())
             {
@@ -42,7 +63,21 @@ namespace Lm.WebMVC.Controllers
             model.Name = HttpUtility.HtmlEncode(name);
             model.Email = HttpUtility.HtmlEncode(email);
             model.Message = HttpUtility.HtmlEncode(message);
+            model.MessType = false; //0:联系信息
             model.SubmitDate = System.DateTime.Now;
+
+            //当前邮件今天所发的记录数
+            var list = cBll.GetListByAll().Where(o => o.Email == email &&
+            o.SubmitDate.ToString("yyyy-MM-dd") == System.DateTime.Now.ToString("yyyy-MM-dd") &&
+            o.MessType == false).Count();
+
+            if (list >= 5)
+            {
+                sReturnModel.ErrorType = 2;
+                sReturnModel.MessageContent = "信息发送失败!每人每天只允许发送<span style='color:red;'>5条</span>信息.";
+                return Json(sReturnModel);
+            }
+
 
             if (cBll.AddOrUpdate(model))
             {

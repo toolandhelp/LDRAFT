@@ -61,6 +61,7 @@
           <Property Name="IsDisplay" Type="bit" Nullable="false" />
           <Property Name="IsLook" Type="bit" Nullable="false" />
           <Property Name="OperationDate" Type="datetime" />
+          <Property Name="MessType" Type="bit" />
         </EntityType>
         <EntityType Name="tb_CompanyInfo">
           <Key>
@@ -71,8 +72,12 @@
           <Property Name="Company_Address" Type="nvarchar" MaxLength="150" />
           <Property Name="Company_Call" Type="varchar" MaxLength="25" />
           <Property Name="Company_Email" Type="varchar" MaxLength="50" />
-          <Property Name="Company_Description_T" Type="varchar" MaxLength="100" />
+          <Property Name="Company_Description_T" Type="varchar" MaxLength="300" />
           <Property Name="Company_description" Type="varchar" MaxLength="300" />
+          <Property Name="Company_WorkTime" Type="varchar" MaxLength="300" />
+          <Property Name="Company_AddersImgUrl" Type="varchar" MaxLength="200" />
+          <Property Name="Company_LogoUrl" Type="varchar" MaxLength="200" />
+          <Property Name="Company_copyright" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tb_Dictionary">
           <Key>
@@ -117,6 +122,7 @@
           <Property Name="menu_Sort" Type="int" />
           <Property Name="menu_Stage" Type="int" Nullable="false" />
           <Property Name="menu_Note" Type="varchar" MaxLength="200" />
+          <Property Name="menu_Link_temp" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="tb_News">
           <Key>
@@ -240,6 +246,7 @@
           <Property Name="IsDisplay" Type="Boolean" Nullable="false" />
           <Property Name="IsLook" Type="Boolean" Nullable="false" />
           <Property Name="OperationDate" Type="DateTime" Precision="3" />
+          <Property Name="MessType" Type="Boolean" />
         </EntityType>
         <EntityType Name="tb_CompanyInfo">
           <Key>
@@ -250,8 +257,12 @@
           <Property Name="Company_Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Company_Call" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Company_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Company_Description_T" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Description_T" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Company_description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Company_WorkTime" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Company_AddersImgUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Company_LogoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Company_copyright" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_Dictionary">
           <Key>
@@ -296,6 +307,7 @@
           <Property Name="menu_Sort" Type="Int32" />
           <Property Name="menu_Stage" Type="Int32" Nullable="false" />
           <Property Name="menu_Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="menu_Link_temp" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tb_News">
           <Key>
@@ -389,6 +401,7 @@
           <EntitySetMapping Name="tb_ClientMessage">
             <EntityTypeMapping TypeName="lmModel.tb_ClientMessage">
               <MappingFragment StoreEntitySet="tb_ClientMessage">
+                <ScalarProperty Name="MessType" ColumnName="MessType" />
                 <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
                 <ScalarProperty Name="IsLook" ColumnName="IsLook" />
                 <ScalarProperty Name="IsDisplay" ColumnName="IsDisplay" />
@@ -404,6 +417,10 @@
           <EntitySetMapping Name="tb_CompanyInfo">
             <EntityTypeMapping TypeName="lmModel.tb_CompanyInfo">
               <MappingFragment StoreEntitySet="tb_CompanyInfo">
+                <ScalarProperty Name="Company_copyright" ColumnName="Company_copyright" />
+                <ScalarProperty Name="Company_LogoUrl" ColumnName="Company_LogoUrl" />
+                <ScalarProperty Name="Company_AddersImgUrl" ColumnName="Company_AddersImgUrl" />
+                <ScalarProperty Name="Company_WorkTime" ColumnName="Company_WorkTime" />
                 <ScalarProperty Name="Company_description" ColumnName="Company_description" />
                 <ScalarProperty Name="Company_Description_T" ColumnName="Company_Description_T" />
                 <ScalarProperty Name="Company_Email" ColumnName="Company_Email" />
@@ -447,6 +464,7 @@
           <EntitySetMapping Name="tb_Menu_B">
             <EntityTypeMapping TypeName="lmModel.tb_Menu_B">
               <MappingFragment StoreEntitySet="tb_Menu_B">
+                <ScalarProperty Name="menu_Link_temp" ColumnName="menu_Link_temp" />
                 <ScalarProperty Name="menu_Note" ColumnName="menu_Note" />
                 <ScalarProperty Name="menu_Stage" ColumnName="menu_Stage" />
                 <ScalarProperty Name="menu_Sort" ColumnName="menu_Sort" />
