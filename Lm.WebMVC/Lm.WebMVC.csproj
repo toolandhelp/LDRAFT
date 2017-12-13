@@ -161,8 +161,10 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ClassisPlanController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\temptestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1043,6 +1045,11 @@
     <Content Include="Views\ContactUs\Index.cshtml" />
     <Content Include="Views\Home\Content.cshtml" />
     <Content Include="Views\Home\Index_1207bak.cshtml" />
+    <Content Include="Views\temptest\Index.cshtml" />
+    <Content Include="Views\ClassisPlan\Index.cshtml" />
+    <Content Include="Views\ClassisPlan\Default.cshtml" />
+    <Content Include="Views\ClassisPlan\cgc.cshtml" />
+    <Content Include="Views\ClassisPlan\jbg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

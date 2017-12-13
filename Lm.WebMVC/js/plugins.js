@@ -57,7 +57,9 @@
 
         // Change window location
         $select.change(function () {
-          window.location.href = $(this).val();
+            $("#main").prop("src", $(this).val());
+          //$("#main").attr("src", $(this).val());
+          //window.location.href = $(this).val();
         });
 
         // Inject select

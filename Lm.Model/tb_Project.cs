@@ -24,5 +24,7 @@ namespace Lm.Model
         public System.DateTime Create_date { get; set; }
         public Nullable<int> Project_ImgId { get; set; }
         public Nullable<int> Create_People { get; set; }
+        public string Project_Type { get; set; }
+        public bool Project_IsShow { get; set; }
     }
 }

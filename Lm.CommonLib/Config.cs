@@ -101,6 +101,8 @@ namespace Lm.CommonLib
             }
         }
 
+        #region 公司信息
+
         /// <summary>
         /// 公司电话
         /// </summary>
@@ -124,6 +126,7 @@ namespace Lm.CommonLib
                 return string.IsNullOrEmpty(sAdder) ? "上海市 ， 南京东路 ， 开心花园123弄123号" : sAdder.Trim();
             }
         }
+
         /// <summary>
         /// 工作时间
         /// </summary>
@@ -137,7 +140,9 @@ namespace Lm.CommonLib
 
         }
 
-
+        /// <summary>
+        /// 公司邮箱
+        /// </summary>
         public static string Emails
         {
             get
@@ -194,6 +199,63 @@ namespace Lm.CommonLib
                 return string.IsNullOrEmpty(sCopyright) ? " " : sCopyright.Trim();
             }
         }
+
+        #endregion
+
+        #region 首页显示条数
+
+        /// <summary>
+        /// 最近项目
+        /// </summary>
+        public static int RecentProjects
+        {
+            get
+            {
+                //如果小于等于2条就给2条，否则给当前值
+                string sRecentProjectCount = System.Configuration.ConfigurationManager.AppSettings["RecentProjects"];
+                return int.Parse(sRecentProjectCount) <= 2 ? 2 : int.Parse(sRecentProjectCount);
+            }
+        }
+
+        /// <summary>
+        /// 行业动态ID
+        /// </summary>
+        public static string IndustryDynamicsID
+        {
+            get
+            {
+                string sRecentProjectID = System.Configuration.ConfigurationManager.AppSettings["IndustryDynamicsID"];
+                return string.IsNullOrEmpty(sRecentProjectID) ? "005001" : sRecentProjectID.Trim();
+            }
+        }
+
+        /// <summary>
+        /// 行业动态条目数
+        /// </summary>
+        public static int IndustryDynamicsCount
+        {
+            get
+            {
+                //如果小于等于2条就给2条，否则给当前值
+                string sRecentProjectCount = System.Configuration.ConfigurationManager.AppSettings["IndustryDynamicsCount"];
+                return int.Parse(sRecentProjectCount) >= 8 ? 4 : int.Parse(sRecentProjectCount);
+            }
+        }
+
+        /// <summary>
+        /// 动画相册
+        /// </summary>
+        public static int TopProjects
+        {
+            get
+            {
+                //如果大于等于2条就给4条，否则给当前值
+                string sTopProjectCount = System.Configuration.ConfigurationManager.AppSettings["TopProjects"];
+                return int.Parse(sTopProjectCount) >= 8 ? 4 : int.Parse(sTopProjectCount);
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// 系统初始密码

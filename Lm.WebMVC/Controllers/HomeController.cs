@@ -15,40 +15,9 @@ namespace Lm.WebMVC.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //#region 项目
-            //StringBuilder sbRP = new StringBuilder();
-            //var cBll = new BLL_Project();
-            //var list = cBll.GetListByAll().Skip(4).Take(9).ToList();
-            //if (null != list)
-            //{
-            //    GetTake5Work(ref sbRP, list);
-            //}
-
-            //ViewBag.RecentProjects = sbRP;
-            //#endregion
-
-            //#region 最新新闻
-            //StringBuilder sbNews = new StringBuilder();
-            //var NewsBll = new BLL_Articles();
-            ////数据库 17：新闻
-            //var Newslist = NewsBll.GetListByAll().Where(o => o.ArticlesType == 17).Take(4).ToList();
-            //GetTop4News(ref sbNews, Newslist);
-            //ViewBag.HotNews = sbNews;
-            //#endregion
-
-            //#region 业务范围(服务范围) 
-            ////Fid:8 都是服务范围 共5个取4个
-            //StringBuilder sbService = new StringBuilder();
-            //var ServiceBll = new BLL_Dictionary();
-            //var Servicelist = ServiceBll.GetListByAll().Where(o => o.FId == 8).Take(4).OrderByDescending(o => o.Sort).ToList();
-            //Get4Service(ref sbService, Servicelist);
-            //ViewBag.Service = sbService;
-            //#endregion
-
             #region 首页公司信息
             string sTel = Config.CsTel;
             string sAdder = Config.Adder;
-            string CInfoD_T = Config.CInfoD_T;
             string CInfoD = Config.CInfoD;
             string CompanyName = Config.CompanyName;
             string Copyright = Config.Copyright;
@@ -62,7 +31,6 @@ namespace Lm.WebMVC.Controllers
             {
                 sTel = CInfo.Company_Call;
                 sAdder = CInfo.Company_Address;
-                CInfoD_T = CInfo.Company_Description_T;
                 CInfoD = CInfo.Company_description;
                 CompanyName = CInfo.Company_Name;
                 Copyright = CInfo.Company_copyright;
@@ -71,21 +39,73 @@ namespace Lm.WebMVC.Controllers
             ViewBag.Tel = sTel;
             ViewBag.Address = sAdder;
             ViewBag.CInfoD = CInfoD;
-            ViewBag.CInfoD_T = CInfoD_T;
             ViewBag.CompanyName = CompanyName;
-            @ViewBag.Copyright = Copyright;
+            ViewBag.Copyright = Copyright;
             #endregion
             return View();
         }
 
         public ActionResult Content()
         {
-          
+
+            #region 公司术语
+            string CInfoD_T = Config.CInfoD_T;
+            string CInfoD = Config.CInfoD;
+            string CEmail = Config.Emails;
+
+            var CInfoBll = new BLL_CompanyInfo();
+            var CInfo = new tb_CompanyInfo();
+            CInfo = CInfoBll.GetListByAll().OrderByDescending(o => o.Id).FirstOrDefault();
+
+
+            if (CInfo != null)
+            {
+                CInfoD_T = CInfo.Company_Description_T;
+                CInfoD = CInfo.Company_description;
+                CEmail = CInfo.Company_Email;
+            }
+            ViewBag.CInfoD = CInfoD;
+            ViewBag.CInfoD_T = CInfoD_T;
+            ViewBag.CEmail = CEmail;
+            #endregion
+
+            #region 最近项目
+            //修改需根据数据库来
+            string CaseCode = "004";
+            StringBuilder sbRP = new StringBuilder();
+            var cBll = new BLL_Project();
+            var list = cBll.GetListByAll().OrderByDescending(o=>o.Project_Start).Take(Config.RecentProjects).ToList();
+            if (null != list)
+            {
+                GetTakeWork(ref sbRP, list,CaseCode);
+            }
+
+            ViewBag.RecentProjects = sbRP;
+            #endregion
+
+            #region 行业动态
+            StringBuilder sbNews = new StringBuilder();
+            var NewsBll = new BLL_NewsCenter();
+            //数据库 行业动态
+            var Newslist = NewsBll.GetListByAll().Where(o => o.ArticlesType == Config.IndustryDynamicsID).Take(Config.IndustryDynamicsCount).ToList();
+            GetTopNews(ref sbNews, Newslist);
+            ViewBag.HotNews = sbNews;
+            #endregion
+
+            #region 4种描述 
+            //
+            StringBuilder sbService = new StringBuilder();
+            var ServiceBll = new BLL_Dictionary();
+            var Servicelist = ServiceBll.GetListByAll().Take(4).OrderByDescending(o => o.Sort).ToList();
+            GetService(ref sbService, Servicelist);
+            ViewBag.Service = sbService;
+            #endregion
+
             return View();
         }
 
         /// <summary>
-        /// 最新作品
+        /// 页头动画切换《调用相机滑块》
         /// </summary>
         /// <returns></returns>
         public JsonResult LatestWork()
@@ -93,7 +113,11 @@ namespace Lm.WebMVC.Controllers
             var sReturnModel = new ReturnListModel();
 
             var cBll = new BLL_Project();
-            var list = cBll.GetListByAll().Take(4);
+            var list = cBll.GetListByAll().Where(o=>o.Project_IsShow==true);
+            if (list.ToList().Count >= (int)Config.TopProjects)
+            {
+                list.Take(Config.TopProjects);
+            }
 
             sReturnModel.ErrorType = 1;
             sReturnModel.Data = from o in list
@@ -106,16 +130,23 @@ namespace Lm.WebMVC.Controllers
                                     end = string.Format("{0:D}", o.Project_End),
                                     description = o.Project_Description,
                                 };
-            return Json(sReturnModel);
+            return Json(sReturnModel); 
         }
 
         /// <summary>
-        /// 最近项目，后期还需要修改
+        /// 最近项目
         /// </summary>
         /// <param name="sbRP"></param>
         /// <param name="listRp"></param>
-        public void GetTake5Work(ref StringBuilder sbRP, IList<tb_Project> listRp)
+        public void GetTakeWork(ref StringBuilder sbRP, IList<tb_Project> listRp,string sCaseCode)
         {
+            int temp = 150;
+
+            var BLLMenu = new BLL_Menu();
+            var tempMenu = BLLMenu.GetMenu_B_ListByAll().Where(o => o.menu_FatherId == sCaseCode);
+
+
+
             if (listRp.Count > 0)
             {
                 for (int i = 0; i < listRp.Count; i++)
@@ -123,10 +154,17 @@ namespace Lm.WebMVC.Controllers
                     sbRP.Append("<li>");
                     sbRP.Append("<p>");
                     sbRP.Append("<img src=\"/img/demo/300x200.png\" class=\"imgproject\" alt=\"\">");
-                    sbRP.Append("<b>" + listRp[i].Project_Name + "</b>" + listRp[i].Project_Description + "<a href=\"#\">[...]</a>");
+
+                    var iLength = listRp[i].Project_Description.Length;
+                    var sCentent = iLength >= temp ? listRp[i].Project_Description.Substring(0, temp) : listRp[i].Project_Description;
+
+                    sbRP.Append("<b>" + listRp[i].Project_Name + "</b>" + sCentent + "<a href=\"/ClassisPlan/Default?id=" + listRp[i].Id + "\" target=\"main\" >[...]</a>");
                     sbRP.Append("</p>");
                     sbRP.Append("<p>");
-                    sbRP.Append("<a href=\"#fakelink\" class=\"btn btn-primary\"><i class=\"icon-share-alt\"></i>查看类似项目</a>");
+
+                    var tempmodel = tempMenu.Where(o => o.menu_Code == listRp[i].Project_Type).FirstOrDefault();
+
+                    sbRP.Append("<a href=" + tempmodel.menu_Link + " class=\"btn btn-primary\" target=" + tempmodel.menu_Target + "><i class=\"icon-share-alt\"></i>查看类似项目</a>");
                     sbRP.Append("</p>");
                     sbRP.Append("</li>");
                 }
@@ -137,12 +175,13 @@ namespace Lm.WebMVC.Controllers
         }
 
         /// <summary>
-        /// 前四条新闻
+        /// 前四条
         /// </summary>
         /// <param name="sbNews"></param>
         /// <param name="listNews"></param>
-        public void GetTop4News(ref StringBuilder sbNews, IList<tb_Articles> listNews)
+        public void GetTopNews(ref StringBuilder sbNews, IList<tb_NewsCenter> listNews)
         {
+            int temp = 100;
             if (listNews.Count > 0)
             {
                 for (int i = 0; i < listNews.Count; i++)
@@ -164,17 +203,13 @@ namespace Lm.WebMVC.Controllers
 
                     sbNews.Append("</div>");
 
-                    sbNews.Append("<h4><a href = \"bloghome.html\" >" + listNews[i].ArticlesTitle + "</a></h4>");
+                    sbNews.Append("<h4><a  href=\"/NewConent/Default?id=" + listNews[i].ID + "\" target=\"main\">" + listNews[i].ArticlesTitle + "</a></h4>");
 
-                    if (listNews[i].ArticlesContent.Length > 100)
-                    {
-                        sbNews.Append("<p>" + listNews[i].ArticlesContent.Substring(0, 100) + "<a href = \"#\"class=\"read-more\">阅读更多<i class=\"icon-angle-right\"></i></a> </p>");
-                    }
-                    else
-                    {
-                        sbNews.Append("<p>" + listNews[i].ArticlesContent + "<a href = \"#\"class=\"read-more\">阅读更多<i class=\"icon-angle-right\"></i></a> </p>");
-                    }
 
+                    var iLength = listNews[i].ArticlesContent.Length;
+                    var sCentent = iLength >= temp ? listNews[i].ArticlesContent.Substring(0, temp) : listNews[i].ArticlesContent;
+
+                    sbNews.Append("<p>" + sCentent + "<a href=\"/NewConent/Default?id="+listNews[i].ID+"\" class=\"read-more\" target=\"main\">阅读更多<i class=\"icon-angle-right\"></i></a> </p>");
 
                     sbNews.Append(" </article>");
 
@@ -193,8 +228,9 @@ namespace Lm.WebMVC.Controllers
         /// </summary>
         /// <param name="sbService"></param>
         /// <param name="listService"></param>
-        public void Get4Service(ref StringBuilder sbService, IList<tb_Dictionary> listService)
+        public void GetService(ref StringBuilder sbService, IList<tb_Dictionary> listService)
         {
+            int temp = 50;
             if (listService.Count > 0)
             {
                 for (int i = 0; i < listService.Count; i++)
@@ -209,11 +245,15 @@ namespace Lm.WebMVC.Controllers
 
                     sbService.Append("</div>");
 
-                    sbService.Append("<h4>"+listService[i].Name+"</h4>");
+                    sbService.Append("<h4>" + listService[i].Name + "</h4>");
 
-                    sbService.Append("<p>" + listService[i].Description + "</ p> ");
+                    var iLength = listService[i].Description.Length;
 
-                    sbService.Append("<p><a href = \"#\" style = \"font-weight: bold;\" > 阅读更多 →</a > </p >");
+                    var sCentent = iLength >= temp ? listService[i].Description.Substring(0, temp) : listService[i].Description;
+
+                    sbService.Append("<p>" + sCentent + "</ p> ");
+
+                    sbService.Append("<p><a href = "+listService[i].MenuLinkTemp+" style = \"font-weight: bold;\" target="+listService[i].Targets+" > 阅读更多 →</a > </p >");
 
                     sbService.Append("</div>");
 
@@ -278,7 +318,7 @@ namespace Lm.WebMVC.Controllers
         }
 
         /// <summary>
-        /// 作品第4条到第9条
+        /// 最近项目 （暂时不用）
         /// </summary>
         /// <returns></returns>
         public JsonResult Take5Work()
@@ -303,25 +343,7 @@ namespace Lm.WebMVC.Controllers
             return Json(sReturnModel);
         }
 
-        public JsonResult News()
-        {
-            var sReturnModel = new ReturnListModel();
-
-            var cBll = new BLL_News();
-            var list = cBll.GetListByAll().Take(3);
-
-            sReturnModel.ErrorType = 1;
-            sReturnModel.Data = from o in list
-                                select new
-                                {
-                                    id = o.Id,
-                                    title = o.News_Title,
-                                    date = o.News_Date.ToString("yyyy/MM/dd"),
-                                    people = o.News_People,
-                                    content = o.News_Content,
-                                };
-            return Json(sReturnModel);
-        }
+     
 
         [ValidateInput(false)]
         public JsonResult Question()
@@ -417,7 +439,7 @@ namespace Lm.WebMVC.Controllers
                     Id = itemNode.menu_Code,
                     Pid = itemNode.menu_FatherId,
                     Title = itemNode.menu_Name,
-                    Target = itemNode.menu_Image,
+                    Target = itemNode.menu_Target,
                     Url = itemNode.menu_Link
 
                 }));
@@ -427,7 +449,23 @@ namespace Lm.WebMVC.Controllers
 
         public JsonResult BottomNav()
         {
-            return Json(true);
+            var cBll = new BLL_Menu();
+            var list = cBll.GetMenu_B_ListByAll().Where(o => o.menu_Stage == (int)StageMode.Normal);
+            list = list.Where(o => o.menu_Link_temp != null && o.menu_Link_temp != "").ToList();
+
+            if (list != null)
+            {
+                return Json(list.Select(itemNode => new TreeModel
+                {
+                    Id = itemNode.menu_Code,
+                    Pid = itemNode.menu_FatherId,
+                    Title = itemNode.menu_Name,
+                    Target = itemNode.menu_Target,
+                    Url = itemNode.menu_Link_temp
+
+                }));
+            }
+            return Json("[]");
         }
     }
 }

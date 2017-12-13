@@ -73,9 +73,6 @@
     <Compile Include="Sys_Users.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>
-    <Compile Include="tb_Articles.cs">
-      <DependentUpon>Lm.tt</DependentUpon>
-    </Compile>
     <Compile Include="tb_ClientMessage.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>
@@ -91,7 +88,7 @@
     <Compile Include="tb_Menu_B.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>
-    <Compile Include="tb_News.cs">
+    <Compile Include="tb_NewsCenter.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_Project.cs">

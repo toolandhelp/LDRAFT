@@ -12,13 +12,16 @@ namespace Lm.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_Articles
+    public partial class tb_NewsCenter
     {
         public int ID { get; set; }
-        public int ArticlesType { get; set; }
+        public System.DateTime ArticlesDate { get; set; }
+        public string ArticlesType { get; set; }
         public string ArticlesContent { get; set; }
         public string ArticlesTitle { get; set; }
+        public Nullable<int> CommentariesID { get; set; }
         public System.DateTime Creationtime { get; set; }
+        public Nullable<int> CreationPeople { get; set; }
         public string ImgPath { get; set; }
     }
 }

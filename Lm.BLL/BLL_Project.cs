@@ -19,7 +19,7 @@ namespace Lm.BLL
         #endregion
         #region  查询 Search Entity
 
-        //查询所有部门
+        //查询所有项目
         public IList<tb_Project> GetListByAll()
         {
             return dbContext.SearchByAll();

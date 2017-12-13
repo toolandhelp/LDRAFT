@@ -114,7 +114,7 @@
                                                         var modelParent = responseList[i];
 
                                                         if (modelParent.Pid === "0" && modelParent.Url != "#") {
-                                                            buf.push("<li><a href=" + modelParent.Url + " target=\"main\">" + modelParent.Title + "</a></li>");
+                                                            buf.push("<li><a href=" + modelParent.Url + " target=" + modelParent.Target + ">" + modelParent.Title + "</a></li>");
                                                             buf.push("<li class=\"divider-vertical\"></li>");
                                                         } else {
                                                             var childList = new Array();
@@ -134,7 +134,7 @@
                                                             if (childList.length > 0) {
                                                                 buf.push("<ul class=\"dropdown-menu js-activated\" style=\"display: none;\">");
                                                                 for (var j = 0; j < childList.length; j++) {
-                                                                    buf.push("<li> <a href=" + childList[j].Url + "  target=\"main\">" + childList[j].Title + "</a></li>");
+                                                                    buf.push("<li> <a href=" + childList[j].Url + "  target=" + childList[j].Target + ">" + childList[j].Title + "</a></li>");
                                                                 }
                                                             }
                                                             buf.push("</ul></li>");
@@ -147,7 +147,7 @@
                                                     $("#nav").find("li.dropdown").after("<li class=\"divider-vertical\"></li>");
                                                 },
                                                 error: function (xmlHttpRequest, textStatus, errorThrown) {
-                                                    MISSY.iDebugAjaxError(xmlHttpRequest, textStatus, errorThrown);
+                                                    //MISSY.iDebugAjaxError(xmlHttpRequest, textStatus, errorThrown);
                                                     $("#nav").html("数据加载失败,请稍后再试.");
                                                 }
 
@@ -155,7 +155,6 @@
                                             });
                                         });
                                     </script>
-
                                 </ul>
 
                                 <form id="search" action="#" method="GET">
@@ -395,66 +394,36 @@
 
                             <ul class="footermenu">
 
-                                @*<script type="text/javascript">
-                                     $(document).ready(function () {
-                                         $.ajax({
-                                             url: 'BottomNav',
-                                             type: 'POST',
-                                             async: false,
-                                             dataType: "json",
-                                             beforeSend: function () {
-                                                 $(".footermenu").html("<div style='width:120px;margin: 0 auto;color:#fff'> <img src= '/Images/loading.gif' width= '32px' height= '32px' align= 'absmiddle' /> 正在加载...</div > ");
-                                             },
-                                             ContentType: "application/json;charset=utf-8",
-                                             success: function (responseList) {
-                                                 var buf = [];
-                                                 for (var i = 0; i < responseList.length; i++) {
-                                                     var modelParent = responseList[i];
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $.ajax({
+                                            url: 'BottomNav',
+                                            type: 'POST',
+                                            async: false,
+                                            dataType: "json",
+                                            beforeSend: function () {
+                                                $(".footermenu").html("<div style='width:120px;margin: 0 auto;color:#fff'> <img src= '/Images/loading.gif' width= '32px' height= '32px' align= 'absmiddle' /> 正在加载...</div > ");
+                                            },
+                                            ContentType: "application/json;charset=utf-8",
+                                            success: function (responseList) {
+                                                var buf = [];
+                                                for (var i = 0; i < responseList.length; i++) {
+                                                    buf.push("<li><a href=" + responseList[i].Url + " target=" + responseList[i].Target + ">" + responseList[i].Title + "</a></li>");
+                                                }
 
-                                                     if (modelParent.Pid === "0" && modelParent.Url != "#") {
-                                                         buf.push("<li><a href=" + modelParent.Url + " target=\"main\">" + modelParent.Title + "</a></li>");
-                                                         buf.push("<li class=\"divider-vertical\"></li>");
-                                                     } else {
-                                                         var childList = new Array();
-                                                         var tempchildi = 0;
-                                                         for (var k = 0; k < responseList.length; k++) {
-                                                             if (responseList[k].Pid === "0") continue;
-                                                             if (responseList[k].Pid === modelParent.Id) {
-                                                                 childList[tempchildi] = responseList[k];
-                                                                 tempchildi++;
-                                                             }
-                                                         }
-
-                                                         if (modelParent.Url == "#") {
-                                                             buf.push("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + modelParent.Title + "<b class=\"caret\"></b></a>");
-                                                         }
-
-                                                         if (childList.length > 0) {
-                                                             buf.push("<ul class=\"dropdown-menu js-activated\" style=\"display: none;\">");
-                                                             for (var j = 0; j < childList.length; j++) {
-                                                                 buf.push("<li> <a href=" + childList[j].Url + "  target=\"main\">" + childList[j].Title + "</a></li>");
-                                                             }
-                                                         }
-                                                         buf.push("</ul></li>");
-                                                     }
-                                                     //buf.push("<li class=\"divider-vertical\"></li>");
-                                                 }
-
-                                                 // buf.push("<li class=\"divider-vertical\"></li>");
-                                                 $("#nav").html(buf.join(""));
-                                                 $("#nav").find("li.dropdown").after("<li class=\"divider-vertical\"></li>");
-                                             },
-                                             error: function (xmlHttpRequest, textStatus, errorThrown) {
-                                                 MISSY.iDebugAjaxError(xmlHttpRequest, textStatus, errorThrown);
-                                                 $("#nav").html("数据加载失败,请稍后再试.");
-                                             }
+                                                $(".footermenu").html(buf.join(""));
+                                            },
+                                            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                                                console.log(xmlHttpRequest);
+                                                console.log(textStatus);
+                                                console.log(errorThrown);
+                                                $(".footermenu").html("数据加载失败,请稍后再试.");
+                                            }
 
 
-                                         });
-                                     });
-                                </script>*@
-
-
+                                        });
+                                    });
+                                </script>
 
                             </ul>
 
@@ -481,157 +450,14 @@
     </div>
 
     <!-- /.body -->
-    <!--  javascript
 
-    ================================================== -->
-    <!-- js放置在文档的末尾，这样页面加载更快-->
-
-    <!--上面有jQuery v1.11.3-->
-    <!--以下版本jQuery v1.8.3-->
-    <!--<script src="~/js/jquery.js"></script>-->
+    <script src="~/js/jquery.js"></script>
 
     <script src="~/js/bootstrap.js"></script>
 
     <script src="~/js/plugins.js"></script>
 
     <script src="~/js/custom.js"></script>
-
-    <!-- 调用相机滑块 -->
-
-    <script>
-            jQuery(function () {
-
-                jQuery('#camera_wrap_4').camera({
-
-                    height: 'auto',
-
-                    loader: 'bar',
-
-                    pagination: false,
-
-                    thumbnails: false,
-
-                    hover: true,
-
-                    opacityOnGrid: false,
-
-                    fx: 'random',
-
-                    transPeriod: 1500,
-
-                    time: 7000,
-
-                    overlayer: true,
-
-                    imagePath: '/img/'
-
-                });
-
-            });
-
-    </script>
-
-    <!-- 调用特色工作-->
-    @*<script type="text/javascript">
-                                        $(window).load(function () {
-
-                                            $('#recent-projects').carouFredSel({
-
-                                                responsive: true,
-
-                                                width: '100%',
-
-                                                auto: true,
-
-                                                circular: true,
-
-                                                infinite: false,
-
-                                                prev: {
-
-                                                    button: "#car_prev",
-
-                                                    key: "left",
-
-                                                },
-
-                                                next: {
-
-                                                    button: "#car_next",
-
-                                                    key: "right",
-
-                                                },
-
-                                                swipe: {
-
-                                                    onMouse: true,
-
-                                                    onTouch: true
-
-                                                },
-
-                                                scroll: 1500,
-
-                                                items: {
-
-                                                    visible: {
-
-                                                        min: 1,
-
-                                                        max: 1
-
-                                                    }
-
-                                                }
-
-                                            });
-
-                                        });
-
-        </script>*@
-
-    <!-- 调用手风琴 -->
-
-    <script type="text/javascript">
-            $(".accordion h3").eq(0).addClass("active");
-
-            $(".accordion .accord_cont").eq(0).show();
-
-            $(".accordion h3").click(function () {
-
-                $(this).next(".accord_cont").slideToggle("slow")
-
-                    .siblings(".accord_cont:visible").slideUp("slow");
-
-                $(this).toggleClass("active");
-
-                $(this).siblings("h3").removeClass("active");
-
-            });
-
-    </script>
-
-    <!-- 调用从最近的新闻中可以看到不透明度-->
-
-    <script type="text/javascript">
-            $(document).ready(function () {
-
-                $("img.imgOpa").hover(function () {
-
-                    $(this).stop().animate({ opacity: "0.6" }, 'slow');
-
-                },
-
-                    function () {
-
-                        $(this).stop().animate({ opacity: "1.0" }, 'slow');
-
-                    });
-
-            });
-
-    </script>
 
     <!--BEGIN DEMO PANEL
 
@@ -860,83 +686,6 @@
     </div>
 
     <!-- END DEMO PANEL-->
-    @* 数据处理 *@
-    @*  <script src="/Scripts/require/require/2.2.0/require.js"></script>
-        <script src="/Scripts/require/config/1.0.0/require.config.js?v=1.2.3"></script>
-        <script type="text/javascript">
-            require(["jquery", "MISSY"], function () {
-                $(function () {
-                    //  initPage();
-                });
-            });
-        </script>
-               function initPage() {
-                    // topNav();
-                };
-
-                //菜单导航
-                function topNav() {
-                    $.ajax({
-                        url: 'TopNav',
-                        type: 'POST',
-                        async: false,
-                        dataType: "json",
-                        beforeSend: function () {
-                            $("#nav").html("<div style='width:120px;margin: 0 auto;color:#fff'> <img src= '/Images/loading.gif' width= '32px' height= '32px' align= 'absmiddle' /> 正加载...</div > ");
-                        },
-                        ContentType: "application/json;charset=utf-8",
-                        success: function (responseList) {
-                            var buf = [];
-                            //for (var i = 0; i < responseList.length; i++) {
-                            //    var modelParent = responseList[i];
-
-                            //    if (modelParent.Pid === "0" && modelParent.Url != "#") {
-                            //        buf.push("<li><a href=" + modelParent.Url + ">" + modelParent.Title + "</a></li>");
-                            //        buf.push("<li class=\"divider-vertical\"></li>");
-                            //    } //else {
-                            //    //var childList = new Array();
-                            //    //var tempchildi = 0;
-                            //    //for (var k = 0; k < responseList.length; k++) {
-                            //    //    if (responseList[k].Pid === "0") continue;
-                            //    //    if (responseList[k].Pid === modelParent.Id) {
-                            //    //        childList[tempchildi] = responseList[k];
-                            //    //        tempchildi++;
-                            //    //    }
-                            //    //}
-
-                            //    //if (modelParent.Url == "#") {
-                            //    //    buf.push("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + modelParent.Title + "<b class=\"caret\"></b></a>");
-                            //    //}
-
-                            //    //if (childList.length > 0) {
-                            //    //    buf.push("<ul class=\"dropdown-menu js-activated\" style=\"display: none;\">");
-                            //    //    for (var j = 0; j < childList.length; j++) {
-                            //    //        buf.push("<li> <a href=" + childList[j].Url + ">" + childList[j].Title + "</a></li>");
-                            //    //    }
-
-
-                            //    //}
-                            //    //buf.push("</ul></li>");
-
-                            //    //}
-                            //    //buf.push("<li class=\"divider-vertical\"></li>");
-                            //}
-
-                            //$("#nav").html(buf.join(""));
-                        },
-                        error: function (xmlHttpRequest, textStatus, errorThrown) {
-                            MISSY.iDebugAjaxError(xmlHttpRequest, textStatus, errorThrown);
-                            $("#nav").html("数据加载失败,请稍后再试.");
-                        }
-                    });
-                };
-
-
-
-            });
-        </script>*@
-
-
 </body>
 
 </html>

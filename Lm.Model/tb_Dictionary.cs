@@ -16,10 +16,11 @@ namespace Lm.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> FId { get; set; }
+        public string FId { get; set; }
         public string Description { get; set; }
         public string IconImg { get; set; }
-        public Nullable<int> MenuId { get; set; }
+        public string MenuLinkTemp { get; set; }
         public Nullable<int> Sort { get; set; }
+        public string Targets { get; set; }
     }
 }

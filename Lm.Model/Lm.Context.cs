@@ -26,15 +26,14 @@ namespace Lm.Model
         }
     
         public virtual DbSet<Sys_Users> Sys_Users { get; set; }
-        public virtual DbSet<tb_Articles> tb_Articles { get; set; }
         public virtual DbSet<tb_ClientMessage> tb_ClientMessage { get; set; }
         public virtual DbSet<tb_CompanyInfo> tb_CompanyInfo { get; set; }
-        public virtual DbSet<tb_Dictionary> tb_Dictionary { get; set; }
         public virtual DbSet<tb_Menu_A> tb_Menu_A { get; set; }
         public virtual DbSet<tb_Menu_B> tb_Menu_B { get; set; }
-        public virtual DbSet<tb_News> tb_News { get; set; }
         public virtual DbSet<tb_Project> tb_Project { get; set; }
         public virtual DbSet<tb_TeamPeople> tb_TeamPeople { get; set; }
         public virtual DbSet<Sys_LOG> Sys_LOG { get; set; }
+        public virtual DbSet<tb_NewsCenter> tb_NewsCenter { get; set; }
+        public virtual DbSet<tb_Dictionary> tb_Dictionary { get; set; }
     }
 }
