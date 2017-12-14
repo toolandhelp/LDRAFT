@@ -134,7 +134,7 @@
                                                             if (childList.length > 0) {
                                                                 buf.push("<ul class=\"dropdown-menu js-activated\" style=\"display: none;\">");
                                                                 for (var j = 0; j < childList.length; j++) {
-                                                                    buf.push("<li> <a href=\"" + childList[j].Url + "?_r=" + Math.random() + "\"  target=" + childList[j].Target + ">" + childList[j].Title + "</a></li>");
+                                                                    buf.push("<li> <a href=\"" + childList[j].Url + "?_r=" + Math.random() + "&mCode=" + childList[j].Id + "\"  target=" + childList[j].Target + ">" + childList[j].Title + "</a></li>");
                                                                 }
                                                             }
                                                             buf.push("</ul></li>");

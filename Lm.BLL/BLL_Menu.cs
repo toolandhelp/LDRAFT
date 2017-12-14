@@ -32,7 +32,6 @@ namespace Lm.BLL
         }
 
 
-
         //查询所有
         public IList<tb_Menu_B> GetMenu_B_ListByAll()
         {

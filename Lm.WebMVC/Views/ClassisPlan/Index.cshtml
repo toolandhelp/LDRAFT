@@ -69,15 +69,9 @@
 
                         <ul>
 
-                            @ViewBag.SelectBtn
+                            <li><a href="" data-filter="*" class="selected"><i class="icon icon-reorder"></i>&nbsp; 全部</a></li>
 
-                            <li><a href="" data-filter="*" class="selected"><i class="icon icon-reorder"></i>&nbsp; All Items</a></li>
-
-                            <li><a href="" data-filter=".003001"><i class="icon icon-th-large"></i>&nbsp; Landscape</a></li>
-
-                            <li><a href="" data-filter=".cat2"><i class="icon icon-th-list"></i>&nbsp; Overview</a></li>
-
-                            <li><a href="" data-filter=".cat3"><i class="icon icon-th"></i>&nbsp; Green Nature</a></li>
+                            @Html.Raw(ViewBag.SelectBtn)
 
                         </ul>
 
@@ -174,13 +168,40 @@
 
         $(document).ready(function () {
 
+            var Request = new Object();
+            Request = GetRequest(); 
+
+            var ProCode = Request['mCode'];
+
             var $container = $('#content');
 
-            $container.imagesLoaded(function () {
+            if (ProCode == null) {
+                $container.imagesLoaded(function () {
+
+                    $container.isotope({
+
+                        filter: '*',
+
+                        animationOptions: {
+
+                            duration: 750,
+
+                            easing: 'linear',
+
+                            queue: false,
+
+                        }
+
+                    });
+
+                });
+
+            } else {
+                var selector = "." + ProCode;
 
                 $container.isotope({
 
-                    filter: '*',
+                    filter: selector,
 
                     animationOptions: {
 
@@ -191,11 +212,17 @@
                         queue: false,
 
                     }
-
                 });
 
-            });
+                $('a.selected').removeClass('selected');
 
+                $('#' + ProCode).addClass('selected');
+              
+            }
+
+
+
+          
             //FILTER
 
             $('#filter a').click(function () {
@@ -242,6 +269,19 @@
 
             });
 
+
+            function GetRequest() {
+                var url = location.search; //获取url中"?"符后的字串
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.substr(1);
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                    }
+                }
+                return theRequest;
+            }
         });
 
         //ROLL ON HOVER
@@ -274,6 +314,11 @@
 
     </script>
 
+
+    <Script language="javascript">
+
+       
+    </Script> 
 
 </body>
 </html>

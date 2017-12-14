@@ -265,7 +265,7 @@ namespace Lm.CommonLib
             {
                 //如果小于等于20条就给20条，否则给当前值
                 string sPageSize = System.Configuration.ConfigurationManager.AppSettings["PageSize"];
-                return int.Parse(sPageSize) <= 20 ? 20 : int.Parse(sPageSize);
+                return int.Parse(sPageSize) <= 12 ? 12 : int.Parse(sPageSize);
             }
         }
         #endregion

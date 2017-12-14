@@ -20,19 +20,25 @@ namespace Lm.WebMVC.Controllers
         public ActionResult Index()
         {
 
+            string FatherCode = "004"; //根据数据库来的
+
             StringBuilder rsbCaseContent = new StringBuilder();
 
             var cBLL = new BLL_Project();
+            var cMBLL = new BLL_Menu();
+
+            var Mlist = cMBLL.GetMenu_B_ListByAll().Where(o=>o.menu_FatherId== FatherCode);
 
             int iPageIndex = RequestParameters.Pint("Pid");//接收页面传值
 
             int iTotalRecord = 0;
 
-            int iPageSize = 10;// Config.PageSize;
+            int iPageSize = Config.PageSize;
 
-            var list = cBLL.GetPageList(1, iPageSize, ref iTotalRecord);
+            // var list = cBLL.GetPageList(1, iPageSize, ref iTotalRecord); //分页不做了
+            var list = cBLL.GetListByAll();
 
-            ViewBag.SelectBtn = "";
+            ViewBag.SelectBtn = SelectBtn(Mlist.ToList());
 
             if (list.Count != 0) //没有的话就放回
             {
@@ -126,6 +132,7 @@ namespace Lm.WebMVC.Controllers
             var cBLL = new BLL_Menu();
             return cBLL.GetObjectByMenuCode(ProTypeID).menu_Name.Trim();
         }
+
 
         /// <summary>
         /// 计算完成时间
@@ -258,6 +265,11 @@ namespace Lm.WebMVC.Controllers
         #endregion
 
         #region 全部案例 ActionResult Index
+        /// <summary>
+        /// 项目
+        /// </summary>
+        /// <param name="rsbCaseContent"></param>
+        /// <param name="list"></param>
         private void GetCaseContent(ref StringBuilder rsbCaseContent, IList<tb_Project> list)
         {
             Random ran = new Random();
@@ -266,7 +278,7 @@ namespace Lm.WebMVC.Controllers
 
             for (int i = 0; i < list.Count; i++)
             {
-                rsbCaseContent.Append("<div class=\"boxportfolio3 item " + list[i].Project_Type + "\">");
+                rsbCaseContent.Append("<div class=\"boxportfolio3 item " + list[i].Project_Type.Trim() + "\">");
 
                 rsbCaseContent.Append("<div class=\"boxcontainer\">");
 
@@ -276,7 +288,7 @@ namespace Lm.WebMVC.Controllers
 
                 rsbCaseContent.Append("<div class=\"wrapcaption\">");
 
-                rsbCaseContent.Append("<a href=\"/ClassisPlan/Default?_r=" + ran.NextDouble() + "&id=" + list[i].Id + "\" target=\"main\">< i class=\"icon-link captionicons\"></i></a>");
+                rsbCaseContent.Append("<a href=\"/ClassisPlan/Default?_r=" + ran.NextDouble() + "&id=" + list[i].Id + "\" target=\"main\"><i class=\"icon-link captionicons\"></i></a>");
 
                 //rsbCaseContent.Append("<a data-gal="prettyPhoto[gallery1]" href="~/ img / temp / masonry / 1.jpg" title="La Chaux De Fonds"><i class="icon - zoom -in captionicons"></i></a>");
 
@@ -297,6 +309,20 @@ namespace Lm.WebMVC.Controllers
 
         }
 
+
+        private string SelectBtn(IList<tb_Menu_B> list)
+        {
+            string html = "";
+            if (list.Count != 0)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    html += "<li><a href=\"\" id=" + list[i].menu_Code.Trim() + " data-filter=\"." + list[i].menu_Code.Trim() + "\"><i class=\"icon icon-th-large\"></i>&nbsp; " + list[i].menu_Name.Trim() + "</a></li>";
+                }
+            }
+
+            return html;
+        }
         #endregion
 
         #region 公用方法
