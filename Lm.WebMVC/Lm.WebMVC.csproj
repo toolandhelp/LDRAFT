@@ -186,6 +186,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_DB\script.sql" />
     <Content Include="Areas\Admin\assets\css\bootstrap.css" />
     <Content Include="Areas\Admin\assets\css\bootstrap.min.css" />
     <Content Include="Areas\Admin\assets\css\css.css" />
