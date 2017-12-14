@@ -157,6 +157,21 @@
           <Property Name="People_Slogan" Type="nvarchar" MaxLength="50" />
           <Property Name="People_Profile" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="tb_UploadFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DirId" Type="int" />
+          <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Path_sm" Type="varchar" MaxLength="500" />
+          <Property Name="Uploader" Type="int" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="FileSize" Type="varchar" MaxLength="50" />
+          <Property Name="FileType" Type="int" />
+          <Property Name="Sort" Type="int" />
+        </EntityType>
         <EntityContainer Name="lmModelStoreContainer">
           <EntitySet Name="Sys_Users" EntityType="Self.Sys_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ClientMessage" EntityType="Self.tb_ClientMessage" Schema="dbo" store:Type="Tables" />
@@ -167,6 +182,7 @@
           <EntitySet Name="tb_NewsCenter" EntityType="Self.tb_NewsCenter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Project" EntityType="Self.tb_Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_TeamPeople" EntityType="Self.tb_TeamPeople" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_UploadFile" EntityType="Self.tb_UploadFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sys_LOG" EntityType="Self.Sys_LOG" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Sys_LOG].[ID] AS [ID], 
@@ -197,6 +213,7 @@
           <EntitySet Name="Sys_LOG" EntityType="lmModel.Sys_LOG" />
           <EntitySet Name="tb_NewsCenter" EntityType="lmModel.tb_NewsCenter" />
           <EntitySet Name="tb_Dictionary" EntityType="lmModel.tb_Dictionary" />
+          <EntitySet Name="tb_UploadFile" EntityType="lmModel.tb_UploadFile" />
         </EntityContainer>
         <EntityType Name="Sys_Users">
           <Key>
@@ -347,6 +364,21 @@
           <Property Name="MenuLinkTemp" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Sort" Type="Int32" />
           <Property Name="Targets" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_UploadFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DirId" Type="Int32" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Path_sm" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Uploader" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FileSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileType" Type="Int32" />
+          <Property Name="Sort" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -510,6 +542,22 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="FId" ColumnName="FId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_UploadFile">
+            <EntityTypeMapping TypeName="lmModel.tb_UploadFile">
+              <MappingFragment StoreEntitySet="tb_UploadFile">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Uploader" ColumnName="Uploader" />
+                <ScalarProperty Name="Path_sm" ColumnName="Path_sm" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="DirId" ColumnName="DirId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

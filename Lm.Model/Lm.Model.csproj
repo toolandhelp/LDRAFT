@@ -97,6 +97,9 @@
     <Compile Include="tb_TeamPeople.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_UploadFile.cs">
+      <DependentUpon>Lm.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Lm.edmx">

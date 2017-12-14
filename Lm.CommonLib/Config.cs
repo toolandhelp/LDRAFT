@@ -257,6 +257,19 @@ namespace Lm.CommonLib
 
         #endregion
 
+        #region 项目一次显示条目
+
+        public static int PageSize
+        {
+            get
+            {
+                //如果小于等于20条就给20条，否则给当前值
+                string sPageSize = System.Configuration.ConfigurationManager.AppSettings["PageSize"];
+                return int.Parse(sPageSize) <= 20 ? 20 : int.Parse(sPageSize);
+            }
+        }
+        #endregion
+
         /// <summary>
         /// 系统初始密码
         /// </summary>

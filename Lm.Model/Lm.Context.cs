@@ -35,5 +35,6 @@ namespace Lm.Model
         public virtual DbSet<Sys_LOG> Sys_LOG { get; set; }
         public virtual DbSet<tb_NewsCenter> tb_NewsCenter { get; set; }
         public virtual DbSet<tb_Dictionary> tb_Dictionary { get; set; }
+        public virtual DbSet<tb_UploadFile> tb_UploadFile { get; set; }
     }
 }

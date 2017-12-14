@@ -44,8 +44,10 @@
     <Compile Include="BLL_CompanyInfo.cs" />
     <Compile Include="BLL_Dictionary.cs" />
     <Compile Include="BLL_Menu.cs" />
+    <Compile Include="BLL_Menu_A.cs" />
     <Compile Include="BLL_NewsCenter.cs" />
     <Compile Include="BLL_Project.cs" />
+    <Compile Include="BLL_UploadFile.cs" />
     <Compile Include="BLL_User.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

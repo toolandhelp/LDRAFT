@@ -138,9 +138,11 @@ namespace Lm.WebMVC.Controllers
         /// </summary>
         /// <param name="sbRP"></param>
         /// <param name="listRp"></param>
-        public void GetTakeWork(ref StringBuilder sbRP, IList<tb_Project> listRp,string sCaseCode)
+        public void GetTakeWork(ref StringBuilder sbRP, IList<tb_Project> listRp, string sCaseCode)
         {
             int temp = 150;
+
+            Random ran = new Random();
 
             var BLLMenu = new BLL_Menu();
             var tempMenu = BLLMenu.GetMenu_B_ListByAll().Where(o => o.menu_FatherId == sCaseCode);
@@ -151,6 +153,8 @@ namespace Lm.WebMVC.Controllers
             {
                 for (int i = 0; i < listRp.Count; i++)
                 {
+                    // double n = ran.NextDouble();
+
                     sbRP.Append("<li>");
                     sbRP.Append("<p>");
                     sbRP.Append("<img src=\"/img/demo/300x200.png\" class=\"imgproject\" alt=\"\">");
@@ -158,17 +162,18 @@ namespace Lm.WebMVC.Controllers
                     var iLength = listRp[i].Project_Description.Length;
                     var sCentent = iLength >= temp ? listRp[i].Project_Description.Substring(0, temp) : listRp[i].Project_Description;
 
-                    sbRP.Append("<b>" + listRp[i].Project_Name + "</b>" + sCentent + "<a href=\"/ClassisPlan/Default?id=" + listRp[i].Id + "\" target=\"main\" >[...]</a>");
+                    sbRP.Append("<b>" + listRp[i].Project_Name + "</b>" + sCentent + "<a href=\"/ClassisPlan/Default?_r=" + ran.NextDouble() + "&id=" + listRp[i].Id + "\" target=\"main\" >[...]</a>");
                     sbRP.Append("</p>");
                     sbRP.Append("<p>");
 
                     var tempmodel = tempMenu.Where(o => o.menu_Code == listRp[i].Project_Type).FirstOrDefault();
 
-                    sbRP.Append("<a href=" + tempmodel.menu_Link + " class=\"btn btn-primary\" target=" + tempmodel.menu_Target + "><i class=\"icon-share-alt\"></i>查看类似项目</a>");
+                    sbRP.Append("<a href=\"" + tempmodel.menu_Link + "?_r=" + ran.NextDouble() + "\" class=\"btn btn-primary\" target=" + tempmodel.menu_Target + "><i class=\"icon-share-alt\"></i>查看类似项目</a>");
                     sbRP.Append("</p>");
                     sbRP.Append("</li>");
                 }
-            } else
+            }
+            else
             {
                 sbRP.Append("");
             }
@@ -182,6 +187,8 @@ namespace Lm.WebMVC.Controllers
         public void GetTopNews(ref StringBuilder sbNews, IList<tb_NewsCenter> listNews)
         {
             int temp = 100;
+            Random ran = new Random();
+
             if (listNews.Count > 0)
             {
                 for (int i = 0; i < listNews.Count; i++)
@@ -203,13 +210,13 @@ namespace Lm.WebMVC.Controllers
 
                     sbNews.Append("</div>");
 
-                    sbNews.Append("<h4><a  href=\"/NewConent/Default?id=" + listNews[i].ID + "\" target=\"main\">" + listNews[i].ArticlesTitle + "</a></h4>");
+                    sbNews.Append("<h4><a  href=\"/NewConent/Default?_r=" + ran.NextDouble() + "&id=" + listNews[i].ID + "\" target=\"main\">" + listNews[i].ArticlesTitle + "</a></h4>");
 
 
                     var iLength = listNews[i].ArticlesContent.Length;
-                    var sCentent = iLength >= temp ? listNews[i].ArticlesContent.Substring(0, temp) : listNews[i].ArticlesContent;
+                    var sCentent = iLength >= temp ? listNews[i].ArticlesContent.Substring(0, temp) + "..." : listNews[i].ArticlesContent;
 
-                    sbNews.Append("<p>" + sCentent + "<a href=\"/NewConent/Default?id="+listNews[i].ID+"\" class=\"read-more\" target=\"main\">阅读更多<i class=\"icon-angle-right\"></i></a> </p>");
+                    sbNews.Append("<p>" + sCentent + "<a href=\"/NewConent/Default?_r=" + ran.NextDouble() + "&id=" + listNews[i].ID + "\" class=\"read-more\" target=\"main\">阅读更多<i class=\"icon-angle-right\"></i></a> </p>");
 
                     sbNews.Append(" </article>");
 
@@ -231,6 +238,8 @@ namespace Lm.WebMVC.Controllers
         public void GetService(ref StringBuilder sbService, IList<tb_Dictionary> listService)
         {
             int temp = 50;
+            Random ran = new Random();
+
             if (listService.Count > 0)
             {
                 for (int i = 0; i < listService.Count; i++)
@@ -253,7 +262,7 @@ namespace Lm.WebMVC.Controllers
 
                     sbService.Append("<p>" + sCentent + "</ p> ");
 
-                    sbService.Append("<p><a href = "+listService[i].MenuLinkTemp+" style = \"font-weight: bold;\" target="+listService[i].Targets+" > 阅读更多 →</a > </p >");
+                    sbService.Append("<p><a href = \"" + listService[i].MenuLinkTemp + "?_r=" + ran.NextDouble() + "\" style = \"font-weight: bold;\" target=" + listService[i].Targets + " > 阅读更多 →</a > </p >");
 
                     sbService.Append("</div>");
 

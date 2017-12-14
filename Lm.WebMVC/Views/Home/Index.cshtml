@@ -114,7 +114,7 @@
                                                         var modelParent = responseList[i];
 
                                                         if (modelParent.Pid === "0" && modelParent.Url != "#") {
-                                                            buf.push("<li><a href=" + modelParent.Url + " target=" + modelParent.Target + ">" + modelParent.Title + "</a></li>");
+                                                            buf.push("<li><a href=\"" + modelParent.Url + "?_r=" + Math.random() + "\" target=" + modelParent.Target + ">" + modelParent.Title + "</a></li>");
                                                             buf.push("<li class=\"divider-vertical\"></li>");
                                                         } else {
                                                             var childList = new Array();
@@ -134,7 +134,7 @@
                                                             if (childList.length > 0) {
                                                                 buf.push("<ul class=\"dropdown-menu js-activated\" style=\"display: none;\">");
                                                                 for (var j = 0; j < childList.length; j++) {
-                                                                    buf.push("<li> <a href=" + childList[j].Url + "  target=" + childList[j].Target + ">" + childList[j].Title + "</a></li>");
+                                                                    buf.push("<li> <a href=\"" + childList[j].Url + "?_r=" + Math.random() + "\"  target=" + childList[j].Target + ">" + childList[j].Title + "</a></li>");
                                                                 }
                                                             }
                                                             buf.push("</ul></li>");
@@ -408,7 +408,7 @@
                                             success: function (responseList) {
                                                 var buf = [];
                                                 for (var i = 0; i < responseList.length; i++) {
-                                                    buf.push("<li><a href=" + responseList[i].Url + " target=" + responseList[i].Target + ">" + responseList[i].Title + "</a></li>");
+                                                    buf.push("<li><a href=\"" + responseList[i].Url + "?_r=" + Math.random() + "\" target=" + responseList[i].Target + ">" + responseList[i].Title + "</a></li>");
                                                 }
 
                                                 $(".footermenu").html(buf.join(""));

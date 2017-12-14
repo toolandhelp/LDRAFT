@@ -7,12 +7,286 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Default</title>
+
+    <meta charset="utf-8">
+
+    <title>项目详情</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+
+    <link href="~/Content/bootstrap.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/style.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/icons.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/bootstrap-responsive.css?_v=1.1.1" rel="stylesheet">
+
+    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css?_v=1.1.1" media="screen" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+
+      <script src="~/js/html5shiv.js"></script>
+
+    <![endif]-->
 </head>
-<body>
-    <div> 详情页面<br />
-    id:@ViewBag.ID;
+
+<body class="boxed">
+
+    <div class="container">
+
+        <div class="page-header">
+
+            <h2>@ViewBag.ProjectTitle</h2>
+
+            <div class="headerdivider">
+
+            </div>
+
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="span6">
+
+                <p>
+
+                    <b>年份</b> : @ViewBag.Year | <b>地址</b> : @ViewBag.Client | <b>分类</b> : @ViewBag.Category<br />
+
+                    <b>设计者</b> : @ViewBag.Contribution | <b>完成时间</b> : @ViewBag.CompletionTime
+
+                </p>
+
+                <p>
+
+                   @ViewBag.Description
+
+                </p>
+
+                <ul class="icons-ul">
+
+                    @*<li><i class="icon-li icon-ok"></i>Nesciunt tofu stumptown aliqua</li>
+
+                    <li><i class="icon-li icon-ok"></i>Retro synth master</li>
+
+                    <li><i class="icon-li icon-ok"></i>Mustache cliche tempor</li>
+
+                    <li><i class="icon-li icon-ok"></i>Williamsburg carles vegan</li>
+
+                    <li><i class="icon-li icon-ok"></i>Reprehenderit butcher retro</li>
+
+                    <li><i class="icon-li icon-ok"></i>Butcher retro keffiyeh</li>*@
+
+                </ul>
+
+                <br />
+
+                <p class="clearfix">
+
+                    <a href="@ViewBag.ContactUsUrl" class="btn btn-primary" target="main"><i class="icon icon-envelope"></i>&nbsp; @ViewBag.ContactUs</a>
+
+                </p>
+
+            </div>
+
+            <!-- end description area -->
+            <!-- begin slider area -->
+
+            <div class="span6 top10">
+
+                <div class="flexslider">
+
+                    <ul class="slides">
+
+                        @Html.Raw(ViewBag.ThisProImgs);
+
+                    </ul>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+
+            <!-- end slider area -->
+
+        </div>
+
+
+
+        <div class="titleborder top40 clearfix">
+
+            <div>
+
+                类似的项目
+
+            </div>
+
+        </div>
+
+        <div class="row-fluid">
+
+            <div class="span12">
+
+                <div class="list_carousel" style="height:230px;">
+
+                    <div class="carousel_nav">
+
+                        <a class="prev" id="car_prev" href="#"><span>prev</span></a>
+
+                        <a class="next" id="car_next" href="#"><span>next</span></a>
+
+                    </div>
+
+                    <div class="clearfix">
+
+                    </div>
+
+                    <div class="heightauto">
+
+                        <ul id="recent-projects" class="heightauto">
+
+
+                           @Html.Raw(ViewBag.SimilarPro)
+
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- END Carousel List -->
+
     </div>
+
+
+    <script src="~/js/jquery.js"></script>
+
+    <script src="~/js/bootstrap.js"></script>
+
+    <script src="~/js/plugins.js"></script>
+
+    <!-- CALL FLEXSLIDER -->
+
+    <script type="text/javascript">
+
+        $(window).load(function () {
+
+            $('.flexslider').flexslider({
+
+                pauseOnHover: false,
+
+                slideshow: true,                //Boolean: Animate slider automatically
+
+                slideshowSpeed: 4000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
+
+                animationSpeed: 1300,
+
+                animation: "slide",              //String: Select your animation type, "fade" or "slide"
+
+                easing: "swing",               //{NEW} String: Determines the easing method used in jQuery transitions. jQuery easing plugin is supported!
+
+                direction: "horizontal",
+
+                controlNav: true,               //Boolean: Create navigation for paging control of each clide? Note: Leave true for manualControls usage
+
+                directionNav: true
+
+            });
+
+        });
+
+    </script>
+
+    <!-- CALL CAROUSEL LIST -->
+
+    <script type="text/javascript">
+
+        $(window).load(function () {
+
+            $('#recent-projects').carouFredSel({
+
+                responsive: true,
+
+                width: '100%',
+
+                auto: true,
+
+                circular: true,
+
+                infinite: false,
+
+                prev: {
+
+                    button: "#car_prev",
+
+                    key: "left",
+
+                },
+
+                next: {
+
+                    button: "#car_next",
+
+                    key: "right",
+
+                },
+
+                swipe: {
+
+                    onMouse: true,
+
+                    onTouch: true
+
+                },
+
+                scroll: 1500,
+
+                items: {
+
+                    visible: {
+
+                        min: 4,
+
+                        max: 4
+
+                    }
+
+                }
+
+            });
+
+            initWindow();
+        });
+
+        function initWindow() {
+            InitFrameSize();
+            $(window).resize(function () {
+                InitFrameSize();
+            });
+        }
+
+        function InitFrameSize() {
+            var contentHeight = $(document).find("body").height();
+            var frame = $("#main", window.parent.document);
+            var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
+            frame.height(initHeight > contentHeight ? initHeight : contentHeight + 30);
+        }
+
+    </script>
+
+
 </body>
 </html>

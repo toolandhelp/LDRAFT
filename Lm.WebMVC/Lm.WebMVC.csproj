@@ -161,9 +161,13 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\ClassisPlanController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JoinInController.cs" />
+    <Compile Include="Controllers\NewConentController.cs" />
+    <Compile Include="Controllers\ServiceRangeController.cs" />
     <Compile Include="Controllers\temptestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1030,6 +1034,7 @@
     <Content Include="font\fontawesome-webfont.woff2" />
     <Content Include="font\FontAwesome.otf" />
     <None Include="Scripts\_references.js" />
+    <Content Include="UploadFile\5\115e0d7e-4efd-4efd-883a-f813edb90651_20170726094426.png" />
     <Content Include="UploadPic\map.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1050,6 +1055,27 @@
     <Content Include="Views\ClassisPlan\Default.cshtml" />
     <Content Include="Views\ClassisPlan\cgc.cshtml" />
     <Content Include="Views\ClassisPlan\jbg.cshtml" />
+    <Content Include="Views\AboutUs\Index.cshtml" />
+    <Content Include="Views\AboutUs\EntInt.cshtml" />
+    <Content Include="Views\AboutUs\MajTeam.cshtml" />
+    <Content Include="Views\AboutUs\EntPhi.cshtml" />
+    <Content Include="Views\AboutUs\OurClient.cshtml" />
+    <Content Include="Views\ServiceRange\Index.cshtml" />
+    <Content Include="Views\ServiceRange\Structure.cshtml" />
+    <Content Include="Views\ServiceRange\ArchPlan.cshtml" />
+    <Content Include="Views\ServiceRange\EquMag.cshtml" />
+    <Content Include="Views\ServiceRange\mqg.cshtml" />
+    <Content Include="Views\ServiceRange\dxs.cshtml" />
+    <Content Include="Views\ServiceRange\cxjg.cshtml" />
+    <Content Include="Views\ClassisPlan\dxkjkf.cshtml" />
+    <Content Include="Views\ClassisPlan\dmdzz.cshtml" />
+    <Content Include="Views\ClassisPlan\gczz.cshtml" />
+    <Content Include="Views\NewConent\Index.cshtml" />
+    <Content Include="Views\NewConent\Default.cshtml" />
+    <Content Include="Views\NewConent\New.cshtml" />
+    <Content Include="Views\NewConent\Industry.cshtml" />
+    <Content Include="Views\AboutUs\OrgFrames.cshtml" />
+    <Content Include="Views\JoinIn\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

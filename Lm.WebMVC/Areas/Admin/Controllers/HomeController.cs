@@ -33,7 +33,7 @@ namespace Lm.WebMVC.Areas.Admin.Controllers
 
         public JsonResult LeftAuthMenuNav()
         {
-            var cBll = new BLL_Menu();
+            var cBll = new BLL_Menu_A();
             var list = cBll.GetMenu_A_ListByAll().OrderBy(o=>o.menu_Sort).ToList();
 
             if (list != null)

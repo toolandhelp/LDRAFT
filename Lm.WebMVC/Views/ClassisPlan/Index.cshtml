@@ -7,17 +7,273 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+
+    <meta charset="utf-8">
+
+    <title>全部项目</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+
+    <link href="~/Content/bootstrap.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/style.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/icons.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/bootstrap-responsive.css?_v=1.1.1" rel="stylesheet">
+
+    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css?_v=1.1.1" media="screen" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+
+      <script src="~/js/html5shiv.js"></script>
+
+    <![endif]-->
 </head>
-<body>
-    <div> 案例主页，还不知道放什么东西，
-    要放所有案例把<br />
-    超高层/城市综合体
-酒店/办公/工业/旧城市改造
-高层住宅
-低密度住宅
-地下空间开发
+<body class="boxed">
+
+    <div class="container">
+
+        <!-- MASONRY ITEMS START
+
+        ================================================== -->
+
+        <div class="row-fluid">
+
+            <div class="page-header">
+
+                <h2>经典案例</h2>
+
+                <div class="headerdivider">
+
+                </div>
+
+            </div>
+
+            <!-- Filtering Menu
+
+            ================================================== -->
+
+            <div class="row-fluid">
+
+                <div class="span12 text-center">
+
+                    <div id="filter">
+
+                        <ul>
+
+                            @ViewBag.SelectBtn
+
+                            <li><a href="" data-filter="*" class="selected"><i class="icon icon-reorder"></i>&nbsp; All Items</a></li>
+
+                            <li><a href="" data-filter=".003001"><i class="icon icon-th-large"></i>&nbsp; Landscape</a></li>
+
+                            <li><a href="" data-filter=".cat2"><i class="icon icon-th-list"></i>&nbsp; Overview</a></li>
+
+                            <li><a href="" data-filter=".cat3"><i class="icon icon-th"></i>&nbsp; Green Nature</a></li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- END filtering menu -->
+
+            <div id="content">
+
+                <!--案例内容-->
+                @Html.Raw(ViewBag.CaseContent)
+
+                <!--添加翻页-->
+            </div>
+
+        </div>
+
     </div>
+
+    <!-- 
+    ==================================================
+    -->
+    <!-- 放置在文档的末尾，使页面加载速度更快-->
+
+    <script src="~/js/jquery.js"></script>
+
+    <script src="~/js/bootstrap.js"></script>
+
+    <script src="~/js/plugins.js"></script>
+
+    <script src="~/js/prettyPhoto.js"></script>
+
+    <script>
+
+        $(window).load(function () {
+
+            var $container = $('#content')
+
+            // initialize Isotope
+
+            $container.isotope({
+
+                // options...
+
+                resizable: false, // disable normal resizing
+
+                // set columnWidth to a percentage of container width
+
+                masonry: { columnWidth: $container.width() / 3 }
+
+            });
+
+            // update columnWidth on window resize
+
+            $(window).smartresize(function () {
+
+                $container.isotope({
+
+                    // update columnWidth to a percentage of container width
+
+                    masonry: { columnWidth: $container.width() / 3 }
+
+                });
+
+            });
+
+            initWindow();
+        });
+
+        //改变iframe 大小
+        function initWindow() {
+            InitFrameSize();
+            $(window).resize(function () {
+                InitFrameSize();
+            });
+        }
+
+        function InitFrameSize() {
+            var contentHeight = $(document).find("body").height();
+            var frame = $("#main", window.parent.document);
+            var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
+            frame.height(initHeight > contentHeight ? initHeight : contentHeight + 30);
+        }
+
+    </script>
+
+    <script>
+
+        //MASONRY
+
+        $(document).ready(function () {
+
+            var $container = $('#content');
+
+            $container.imagesLoaded(function () {
+
+                $container.isotope({
+
+                    filter: '*',
+
+                    animationOptions: {
+
+                        duration: 750,
+
+                        easing: 'linear',
+
+                        queue: false,
+
+                    }
+
+                });
+
+            });
+
+            //FILTER
+
+            $('#filter a').click(function () {
+
+                var selector = $(this).attr('data-filter');
+
+                $container.isotope({
+
+                    filter: selector,
+
+                    animationOptions: {
+
+                        duration: 750,
+
+                        easing: 'linear',
+
+                        queue: false,
+
+                    }
+
+                });
+
+                return false;
+
+            });
+
+            $('#filter a').click(function (event) {
+
+                $('a.selected').removeClass('selected');
+
+                var $this = $(this);
+
+                $this.addClass('selected');
+
+                var selector = $this.attr('data-filter');
+
+                $container.isotope({
+
+                    filter: selector
+
+                });
+
+                return false;
+
+            });
+
+        });
+
+        //ROLL ON HOVER
+
+        $(function () {
+
+            $(".roll").css("opacity", "0");
+
+            $(".roll").hover(function () {
+
+                $(this).stop().animate({
+
+                    opacity: .8
+
+                }, "slow");
+
+            },
+
+                function () {
+
+                    $(this).stop().animate({
+
+                        opacity: 0
+
+                    }, "slow");
+
+                });
+
+        });
+
+    </script>
+
+
 </body>
 </html>

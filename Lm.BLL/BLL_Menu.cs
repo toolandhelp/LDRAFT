@@ -19,11 +19,19 @@ namespace Lm.BLL
         #endregion
         #region  查询 Search Entity
 
-        //获取单条数据
+        //根据ID 获取单条数据 tb_Menu_B
         public tb_Menu_B GetObjectById(int Id)
         {
             return dbContext.SearchBySingle(c => c.menu_Id == Id);
         }
+
+        //根据Code 获取单条数据 tb_Menu_B
+        public tb_Menu_B GetObjectByMenuCode(string sCode)
+        {
+            return dbContext.SearchBySingle(c => c.menu_Code == sCode);
+        }
+
+
 
         //查询所有
         public IList<tb_Menu_B> GetMenu_B_ListByAll()
@@ -31,11 +39,7 @@ namespace Lm.BLL
             return dbContext.SearchByAll();
         }
 
-        public IList<tb_Menu_A> GetMenu_A_ListByAll()
-        {
-            var service = new DbHelperEfSql<tb_Menu_A>();
-            return service.SearchByAll();
-        }
+      
 
         //public IList<ts_Dept> GetEnabledListByParent(string parentID)
         //{
