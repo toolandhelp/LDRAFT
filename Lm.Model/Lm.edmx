@@ -52,6 +52,23 @@
           <Property Name="OperationDate" Type="datetime" />
           <Property Name="MessType" Type="bit" />
         </EntityType>
+        <EntityType Name="tb_CommentMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentariesID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SubmitDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="IsDisplay" Type="bit" Nullable="false" />
+          <Property Name="IsLook" Type="bit" Nullable="false" />
+          <Property Name="OperationDate" Type="datetime" />
+          <Property Name="MessType" Type="bit" />
+        </EntityType>
         <EntityType Name="tb_CompanyInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -127,6 +144,8 @@
           <Property Name="Creationtime" Type="datetime" Nullable="false" />
           <Property Name="CreationPeople" Type="int" />
           <Property Name="ImgPath" Type="varchar" MaxLength="150" />
+          <Property Name="tags" Type="varchar" MaxLength="50" />
+          <Property Name="IsComment" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_Project">
           <Key>
@@ -175,6 +194,7 @@
         <EntityContainer Name="lmModelStoreContainer">
           <EntitySet Name="Sys_Users" EntityType="Self.Sys_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ClientMessage" EntityType="Self.tb_ClientMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_CommentMessage" EntityType="Self.tb_CommentMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_CompanyInfo" EntityType="Self.tb_CompanyInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Dictionary" EntityType="Self.tb_Dictionary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Menu_A" EntityType="Self.tb_Menu_A" Schema="dbo" store:Type="Tables" />
@@ -214,6 +234,7 @@
           <EntitySet Name="tb_NewsCenter" EntityType="lmModel.tb_NewsCenter" />
           <EntitySet Name="tb_Dictionary" EntityType="lmModel.tb_Dictionary" />
           <EntitySet Name="tb_UploadFile" EntityType="lmModel.tb_UploadFile" />
+          <EntitySet Name="tb_CommentMessage" EntityType="lmModel.tb_CommentMessage" />
         </EntityContainer>
         <EntityType Name="Sys_Users">
           <Key>
@@ -351,6 +372,8 @@
           <Property Name="Creationtime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreationPeople" Type="Int32" />
           <Property Name="ImgPath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tags" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsComment" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_Dictionary">
           <Key>
@@ -379,6 +402,23 @@
           <Property Name="FileSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FileType" Type="Int32" />
           <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_CommentMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentariesID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SubmitDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="IsDisplay" Type="Boolean" Nullable="false" />
+          <Property Name="IsLook" Type="Boolean" Nullable="false" />
+          <Property Name="OperationDate" Type="DateTime" Precision="3" />
+          <Property Name="MessType" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -520,6 +560,8 @@
           <EntitySetMapping Name="tb_NewsCenter">
             <EntityTypeMapping TypeName="lmModel.tb_NewsCenter">
               <MappingFragment StoreEntitySet="tb_NewsCenter">
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="tags" ColumnName="tags" />
                 <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
                 <ScalarProperty Name="CreationPeople" ColumnName="CreationPeople" />
                 <ScalarProperty Name="Creationtime" ColumnName="Creationtime" />
@@ -558,6 +600,24 @@
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="DirId" ColumnName="DirId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_CommentMessage">
+            <EntityTypeMapping TypeName="lmModel.tb_CommentMessage">
+              <MappingFragment StoreEntitySet="tb_CommentMessage">
+                <ScalarProperty Name="MessType" ColumnName="MessType" />
+                <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+                <ScalarProperty Name="IsLook" ColumnName="IsLook" />
+                <ScalarProperty Name="IsDisplay" ColumnName="IsDisplay" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CommentariesID" ColumnName="CommentariesID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

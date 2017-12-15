@@ -148,7 +148,7 @@
         //改变iframe 大小
         function initWindow() {
             InitFrameSize();
-            $(window).resize(function () {
+            $(window).smartresize(function () {
                 InitFrameSize();
             });
         }
@@ -156,8 +156,7 @@
         function InitFrameSize() {
             var contentHeight = $(document).find("body").height();
             var frame = $("#main", window.parent.document);
-            var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
-            frame.height(initHeight > contentHeight ? initHeight : contentHeight + 30);
+            frame.height(contentHeight + 10);
         }
 
     </script>
@@ -218,7 +217,7 @@
 
                 $('#' + ProCode).addClass('selected');
               
-            }
+            };
 
 
 
@@ -245,6 +244,8 @@
 
                 });
 
+                ClickBtnFrameSize();
+
                 return false;
 
             });
@@ -265,11 +266,23 @@
 
                 });
 
+                ClickBtnFrameSize();
+
                 return false;
 
             });
 
 
+            function ClickBtnFrameSize() {
+
+                    var frame = $("#main", window.parent.document);
+                    var initHeight = $("#content").height();
+
+                    frame.height(0);
+                    frame.height(initHeight + 10);
+            };
+
+            //获取
             function GetRequest() {
                 var url = location.search; //获取url中"?"符后的字串
                 var theRequest = new Object();

@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll_ClientMessage.cs" />
+    <Compile Include="BLL_ClientMessage.cs" />
+    <Compile Include="BLL_CommentMessage.cs" />
     <Compile Include="BLL_CompanyInfo.cs" />
     <Compile Include="BLL_Dictionary.cs" />
     <Compile Include="BLL_Menu.cs" />

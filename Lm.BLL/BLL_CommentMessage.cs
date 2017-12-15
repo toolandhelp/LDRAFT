@@ -8,39 +8,36 @@ using Lm.DAL;
 
 namespace Lm.BLL
 {
-    public class BLL_ClientMessage
+   public  class BLL_CommentMessage
     {
         #region dbContext
-        public DbHelperEfSql<tb_ClientMessage> dbContext { get; set; }
+        public DbHelperEfSql<tb_CommentMessage> dbContext { get; set; }
 
-        public BLL_ClientMessage()
+        public BLL_CommentMessage()
         {
-            dbContext = new DbHelperEfSql<tb_ClientMessage>();
+            dbContext = new DbHelperEfSql<tb_CommentMessage>();
         }
         #endregion
 
         #region  查询 Search Entity
 
         //查询所有
-        public IList<tb_ClientMessage> GetListByAll()
+        public IList<tb_CommentMessage> GetListByAll()
         {
             return dbContext.SearchByAll();
         }
         #endregion
 
+
+        public IList<tb_CommentMessage> GetListByNewId(int iid)
+        {
+            return dbContext.SearchByAll().Where(o => o.CommentariesID == iid).ToList();
+        }
+
         #region
-        public bool AddOrUpdate(tb_ClientMessage item)
+        public bool AddOrUpdate(tb_CommentMessage item)
         {
             return item.Id >= 0 ? dbContext.Add(item) : dbContext.Update(item, c => c.Id == item.Id);
-
-            //if (item.Id == 0)
-            //{
-            //    return dbContext.Add(item);
-            //}
-            //else
-            //{
-            //    return dbContext.Update(item, c => c.Id == item.Id);
-            //}
         }
         #endregion
     }

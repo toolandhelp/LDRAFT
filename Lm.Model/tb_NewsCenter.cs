@@ -23,5 +23,7 @@ namespace Lm.Model
         public System.DateTime Creationtime { get; set; }
         public Nullable<int> CreationPeople { get; set; }
         public string ImgPath { get; set; }
+        public string tags { get; set; }
+        public bool IsComment { get; set; }
     }
 }

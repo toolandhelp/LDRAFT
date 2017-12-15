@@ -36,5 +36,6 @@ namespace Lm.Model
         public virtual DbSet<tb_NewsCenter> tb_NewsCenter { get; set; }
         public virtual DbSet<tb_Dictionary> tb_Dictionary { get; set; }
         public virtual DbSet<tb_UploadFile> tb_UploadFile { get; set; }
+        public virtual DbSet<tb_CommentMessage> tb_CommentMessage { get; set; }
     }
 }

@@ -7,11 +7,460 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Default</title>
+
+    <meta charset="utf-8">
+
+    <title>新闻中心</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+
+    <link href="~/Content/bootstrap.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/style.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/icons.css?_v=1.1.1" rel="stylesheet">
+
+    <link href="~/Content/bootstrap-responsive.css?_v=1.1.1" rel="stylesheet">
+
+    <link rel="stylesheet" id="main-color" href="~/Content/skin-orange.css?_v=1.1.1" media="screen" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+
+      <script src="~/js/html5shiv.js"></script>
+
+    <![endif]-->
 </head>
-<body>
-    <div> 详情（行业状态+新闻）ID=@ViewBag.ID
+<body class="boxed">
+
+    <div class="container">
+
+        <div class="row-fluid">
+
+            <div class="span8 span-fixed-sidebar">
+
+                <div class="row-fluid">
+
+                    <div class="span12">
+
+                        <header class="entry-header">
+
+                            <div class="sectiontitlepost">
+
+                                <h1>@ViewBag.Title</h1>
+
+                            </div>
+
+                            <div class="entry-meta">
+
+                                <a href="javascript:;">
+                                    <span class="entry-date">@ViewBag.Yeas</span>
+                                </a>
+
+                                @Html.Raw(ViewBag.CommentCount)
+
+                            </div>
+
+                            <!-- .entry-meta -->
+
+                        </header>
+
+                        <div class="innerblogboxtwo">
+
+                            <div class="entry-content">
+                                <p style="text-indent:25px;">
+                                    @ViewBag.Content
+                                </p>
+                            </div>
+
+                            <footer class="entry-meta">
+                               
+                                所属标签 :@Html.Raw(ViewBag.Tags)
+                               
+                            </footer>
+
+                        </div>
+
+                        <div id="comments" name="comments">
+
+                            <div class="blogbox comments-area">
+
+                                <h3 class="commentstitle">
+
+                                    <i class="icon-comments muted"></i> 评论区
+                                </h3>
+                                <div class="comment-list left0">
+                                 
+                                        @Html.Raw(ViewBag.CommentContent)
+                                   
+                                </div>
+                                <!-- .commentlist -->
+
+                            </div>
+
+                        </div>
+
+                        <div id="respond">
+
+                            <h3 id="reply-title">
+                                <i class="icon-edit muted"></i> 添加你的评论
+                            </h3>
+
+                            <form method="post" action="#" id="#">
+
+                                <div class="form">
+
+                                    <div class="controls controls-row">
+
+                                        <input class="span4" type="text" name="name" placeholder="Name *">
+
+                                        <input class="span4" type="email" name="email" placeholder="E-mail (not published) *">
+
+                                        <input class="span4" type="text" name="email" placeholder="Website">
+
+                                    </div>
+
+                                    <div class="controls">
+
+                                        <textarea class="span12" name="comment" rows="8" placeholder="Comment *"></textarea>
+
+                                    </div>
+
+                                    <input type="submit" class="btn btn-inverse" value="Post Comment">
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <!--/span-->
+
+                </div>
+
+                <!--/row-->
+
+            </div>
+
+            <!--/span-->
+            <!--右边-->
+            <div class="span4 top20">
+
+                <ul id="myTab" class="nav nav-tabs">
+
+                    <li class="active">
+                        <a href="#News" data-toggle="tab">同辰新闻</a>
+                    </li>
+
+                    <li class="">
+                        <a href="#Industry" data-toggle="tab">行业动态</a>
+                    </li>
+
+                    <li class="">
+                        <a href="#Tags" data-toggle="tab">标签</a>
+                    </li>
+
+                </ul>
+
+                <div id="myTabContent" class="tab-content multi-sidebar">
+
+                    <div class="tab-pane fade active in" id="News">
+
+                        <ul class="sidebar-latest">
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/300x200.png" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">Android 4.3 to hit Sony Xperia smartphones, tablet</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">July 25, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/300x200.png" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">Geeksphone now selling Firefox OS to consumers with Peak+</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">June 14, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/300x200.png" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">Google goes after Apple in tablet education</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">May 7, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/300x200.png" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">Apple now EA's biggest retail partner, thanks to iOS</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">April 3, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/300x200.png" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">New video compares leaked iPhone plastic case to previous models</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">February 16, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="Industry">
+
+                        <ul class="sidebar-latest">
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/avatar.jpg" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">"The apple- pickers on the ladders raised a hum..."</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">July 25, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/avatar.jpg" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">"Alice was beginning to get very tired of sitting..."</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">June 14, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/avatar.jpg" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">"Let us begin at the simplest point, what is a comic..."</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">May 7, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/avatar.jpg" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">"I assume it as self-evident that those who, at any given..."</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">April 3, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                            <li class="clearfix">
+
+                                <a href="#">
+                                    <img src="img/demo/avatar.jpg" class="attachment-thumbnail" alt="">
+                                </a>
+
+                                <a href="#">"The greatest length or breadth of a full grown..."</a>
+                                <br>
+
+                                <small>
+                                    <a href="#">
+                                        <span class="entry-date">February 16, 2013</span>
+                                    </a>
+                                </small>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="Tags">
+
+                        <div class="tagcloud">
+
+                            <a href="#">mobile</a>
+
+                            <a href="#">google</a>
+
+                            <a href="#">apple</a>
+
+                            <a href="#">phones</a>
+
+                            <a href="#">ipads</a>
+
+                            <a href="#">tablets</a>
+
+                            <a href="#">desktops</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- END Tabs -->
+
+                <div class="sidebarBox widget-container widget_text">
+
+                    <h4 class="widget-title">Another Widget</h4>
+
+                    <div class="textwidget">
+
+                        Aenean enim urna, luctus vel sollicitudin eu, lobortis et sapien. Duis justo purus, scelerisque sed iaculis vitae, dignissim
+                        a est. Pellentesque congu. Nulla dictum auctor dui, a sagittis arcu mattis eu.
+
+                    </div>
+
+                </div>
+
+                <div class="sidebarBox widget-container widget_text">
+
+                    <h4 class="widget-title">Apple's Suppliers</h4>
+
+                    <div class="textwidget">
+
+                        <iframe height="250" style="width:99.3%;" allowfullscreen="" ></iframe>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--/span-->
+
+        </div>
+
+        <!--/row-->
+
     </div>
+
+    <!--
+    ==================================================
+    -->
+    <!-- 放置在文档的末尾，使页面加载速度更快-->
+
+    <script src="~/js/jquery.js"></script>
+
+    <script src="~/js/bootstrap.js"></script>
+
+    <script>
+
+        $(window).load(function () {
+            setInterval(initWindow(), 1000);
+          
+        });
+
+        //改变iframe 大小
+        function initWindow() {
+            InitFrameSize();
+            $(window).resize(function () {
+                InitFrameSize();
+            });
+            MessShow();
+        }
+
+        function InitFrameSize() {
+            var contentHeight = $(document).find("body").height();
+            var frame = $("#main", window.parent.document);
+            frame.height(contentHeight + 10);
+        }
+
+        function MessShow() {
+            var isShow = $("#CommentsShow").attr("isShow");
+            if (isShow=='true') {
+                $("#respond").show();
+            } else
+            {
+                $("#respond").hide();
+            }
+           
+        }
+
+    </script>
 </body>
 </html>

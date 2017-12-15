@@ -15,3 +15,34 @@
     </div>
 </body>
 </html>
+<script src="~/js/jquery.js"></script>
+<script type="text/javascript">
+
+                    $(function () {
+                        setInterval(initWindow(), 1000);
+                    });
+
+                    //$(document).ready(function () {
+                    //    initWindow();
+                    //});
+
+                    function initWindow() {
+                        InitFrameSize();
+                        $(window).resize(function () {
+                            InitFrameSize();
+                        });
+                    }
+
+                    function InitFrameSize() {
+                        var contentHeight = $(document).find("body").height();
+
+                        var frame = $("#main", window.parent.document);
+
+                        frame.height(0);
+                        var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
+                        frame.height(initHeight > contentHeight ? initHeight : contentHeight + 10);
+                        // frame.height(contentHeight + 10);
+                    }
+
+
+</script>

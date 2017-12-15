@@ -392,7 +392,7 @@
             var contentHeight = $(document).find("body").height();
             var frame = $("#main", window.parent.document);
             var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
-            frame.height(initHeight > contentHeight ? initHeight : contentHeight + 30);
+            frame.height(initHeight > contentHeight ? initHeight : contentHeight + 10);
         }
     </script>
     <!--BEGIN DEMO PANEL-->

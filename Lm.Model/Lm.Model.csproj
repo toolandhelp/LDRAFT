@@ -76,6 +76,9 @@
     <Compile Include="tb_ClientMessage.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_CommentMessage.cs">
+      <DependentUpon>Lm.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_CompanyInfo.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>

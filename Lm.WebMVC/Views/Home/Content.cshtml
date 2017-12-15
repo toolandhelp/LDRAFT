@@ -415,33 +415,15 @@
 
     </script>
 
-    <!-- 调用从最近的新闻中可以看到不透明度-->
+    
 
-    <script type="text/javascript">
-                    $(document).ready(function () {
+</body>
+</html>
 
-                        $("img.imgOpa").hover(function () {
-
-                            $(this).stop().animate({ opacity: "0.6" }, 'slow');
-
-                        },
-
-                            function () {
-
-                                $(this).stop().animate({ opacity: "1.0" }, 'slow');
-
-                            });
-
-                    });
-
-
-
-    </script>
-
-    <script type="text/javascript">
+<script type="text/javascript">
 
                     $(function () {
-                        initWindow();
+                        setInterval(initWindow(), 1000);
                     });
 
                     //$(document).ready(function () {
@@ -450,21 +432,24 @@
 
                     function initWindow() {
                         InitFrameSize();
-                        $(window).resize(function () {
+                        $(window).smartresize(function () {
                             InitFrameSize();
                         });
+                        //$(window).resize(function () {
+                        //    InitFrameSize();
+                        //});
                     }
 
                     function InitFrameSize() {
                         var contentHeight = $(document).find("body").height();
+
                         var frame = $("#main", window.parent.document);
+
                         var initHeight = parseInt(!isNaN(frame.attr("init_height")) ? frame.attr("init_height") : "0");
-                        frame.height(initHeight > contentHeight ? initHeight : contentHeight + 30);
+                        frame.height(initHeight > contentHeight ? initHeight : contentHeight + 10);
+                        // frame.height(contentHeight + 10);
                     }
 
 
-    </script>
-
-</body>
-</html>
+</script>
 

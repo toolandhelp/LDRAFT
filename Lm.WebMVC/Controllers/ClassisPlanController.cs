@@ -29,13 +29,13 @@ namespace Lm.WebMVC.Controllers
 
             var Mlist = cMBLL.GetMenu_B_ListByAll().Where(o=>o.menu_FatherId== FatherCode);
 
-            int iPageIndex = RequestParameters.Pint("Pid");//接收页面传值
+            //int iPageIndex = RequestParameters.Pint("Pid");//接收页面传值
 
-            int iTotalRecord = 0;
+            //int iTotalRecord = 0;
 
-            int iPageSize = Config.PageSize;
+            //int iPageSize = Config.PageSize;
 
-            // var list = cBLL.GetPageList(1, iPageSize, ref iTotalRecord); //分页不做了
+            //var list = cBLL.GetPageList(1, iPageSize, ref iTotalRecord); //分页不做了
             var list = cBLL.GetListByAll();
 
             ViewBag.SelectBtn = SelectBtn(Mlist.ToList());
@@ -66,7 +66,7 @@ namespace Lm.WebMVC.Controllers
             var model = cBLL.GetObjectById(id);
             if (model != null) //判断没有只有要提示
             {
-                ViewBag.ProjectTitle = model.Project_Name;
+                ViewBag.ProjectTitle = model.Project_Name.Trim();
                 ViewBag.Year = model.Project_Start.ToString("yyyy");
                 ViewBag.Client = model.Project_Location;
                 ViewBag.Category = this.ProType(model.Project_Type);
@@ -84,36 +84,6 @@ namespace Lm.WebMVC.Controllers
                 ViewBag.SimilarPro = sbSimilar; //类似项目
             }
 
-            return View();
-        }
-
-        //超高层/城市综合体
-        public ActionResult cgc()
-        {
-            return View();
-        }
-
-        //酒店/办公/工业/旧城市改造
-        public ActionResult jbg()
-        {
-            return View();
-        }
-
-        //高层住宅
-        public ActionResult gczz()
-        {
-            return View();
-        }
-
-        //低密度住宅
-        public ActionResult dmdzz()
-        {
-            return View();
-        }
-
-        //地下空间开发
-        public ActionResult dxkjkf()
-        {
             return View();
         }
 

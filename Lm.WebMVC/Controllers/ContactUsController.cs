@@ -51,6 +51,7 @@ namespace Lm.WebMVC.Controllers
             string message = RequestParameters.Pstring("message");
             string txtValicode = RequestParameters.Pstring("code");
 
+            #region 检查参数
             if (txtValicode != Session["captcha"].ToString())
             {
                 sReturnModel.ErrorType = 0;
@@ -58,7 +59,30 @@ namespace Lm.WebMVC.Controllers
                 return Json(sReturnModel);
             }
 
-            var cBll = new Bll_ClientMessage();
+            if (name.Length < 1)
+            {
+                sReturnModel.ErrorType = 0;
+                sReturnModel.MessageContent = "信息发送失败!姓名不能为空.";
+                return Json(sReturnModel);
+            }
+
+            if (email.Length < 1)
+            {
+                sReturnModel.ErrorType = 0;
+                sReturnModel.MessageContent = "信息发送失败!邮箱不能为空.";
+                return Json(sReturnModel);
+            }
+
+            if (message.Length < 1)
+            {
+                sReturnModel.ErrorType = 0;
+                sReturnModel.MessageContent = "信息发送失败!信息内容不能为空.";
+                return Json(sReturnModel);
+            }
+            #endregion
+
+
+            var cBll = new BLL_ClientMessage();
             var model = new tb_ClientMessage();
             model.Name = HttpUtility.HtmlEncode(name);
             model.Email = HttpUtility.HtmlEncode(email);

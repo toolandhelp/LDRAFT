@@ -26,6 +26,16 @@ namespace Lm.BLL
         {
             return dbContext.SearchByAll();
         }
+
+        /// <summary>
+        /// 根据ID获取
+        /// </summary>
+        /// <param name="gid"></param>
+        /// <returns></returns>
+        public tb_NewsCenter GetObjectById(int iid)
+        {
+            return dbContext.SearchBySingle(c => c.ID == iid);
+        }
         #endregion
     }
 }
