@@ -330,7 +330,7 @@ namespace Lm.WebMVC.Controllers
 
                     var tempTypeURl = Namelist.Where(o => o.menu_Code == temp.ArticlesType).FirstOrDefault().menu_Link;
 
-                    ALLHtml.Append("<i class=\"floatright icon-flag\" style=\"float:right; font-size:.3rem;\">: <a href=\"" + tempTypeURl + "?_r=" + ran.NextDouble() + "&mCode=" + temp.ArticlesType + "\" target=\"main\">" + tempType + "</a></i></p>");
+                    ALLHtml.Append("<i class=\"floatright icon-flag\" style=\"float:right;\">: <a href=\"" + tempTypeURl + "?_r=" + ran.NextDouble() + "&mCode=" + temp.ArticlesType + "\" target=\"main\">" + tempType + "</a></i></p>");
                     ALLHtml.Append("<div class=\"innerblogboxtwo\"><p>");
 
                     var tempContent = temp.ArticlesContent.Trim().Length > contentLenth * 4 + 10 ? temp.ArticlesContent.Trim().Substring(0, contentLenth * 4 + 10) + "..." : temp.ArticlesContent.Trim();
