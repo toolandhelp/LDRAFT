@@ -103,6 +103,9 @@
     <Compile Include="tb_UploadFile.cs">
       <DependentUpon>Lm.tt</DependentUpon>
     </Compile>
+    <Compile Include="v_NewsCenterComment.cs">
+      <DependentUpon>Lm.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Lm.edmx">

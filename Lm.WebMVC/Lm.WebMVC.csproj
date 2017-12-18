@@ -1075,6 +1075,7 @@
     <Content Include="Views\AboutUs\OrgFrames.cshtml" />
     <Content Include="Views\JoinIn\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\NewConent\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

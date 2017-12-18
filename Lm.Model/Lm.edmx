@@ -191,6 +191,43 @@
           <Property Name="FileType" Type="int" />
           <Property Name="Sort" Type="int" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“lm.dbo.v_NewsCenterComment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_NewsCenterComment">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="Message" />
+            <PropertyRef Name="SubmitDate" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="IsDisplay" />
+            <PropertyRef Name="IsLook" />
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SubmitDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="IsDisplay" Type="bit" Nullable="false" />
+          <Property Name="IsLook" Type="bit" Nullable="false" />
+          <Property Name="OperationDate" Type="datetime" />
+          <Property Name="MessType" Type="bit" />
+          <Property Name="ID" Type="int" />
+          <Property Name="ArticlesDate" Type="datetime" />
+          <Property Name="ArticlesType" Type="varchar" MaxLength="50" />
+          <Property Name="ArticlesContent" Type="varchar" MaxLength="5000" />
+          <Property Name="ArticlesTitle" Type="varchar" MaxLength="200" />
+          <Property Name="CommentariesID" Type="int" />
+          <Property Name="Creationtime" Type="datetime" />
+          <Property Name="CreationPeople" Type="int" />
+          <Property Name="ImgPath" Type="varchar" MaxLength="150" />
+          <Property Name="tags" Type="varchar" MaxLength="50" />
+          <Property Name="IsComment" Type="bit" />
+          <Property Name="CommentID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="lmModelStoreContainer">
           <EntitySet Name="Sys_Users" EntityType="Self.Sys_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ClientMessage" EntityType="Self.tb_ClientMessage" Schema="dbo" store:Type="Tables" />
@@ -217,6 +254,32 @@
     [Sys_LOG].[EXCEPTION] AS [EXCEPTION]
     FROM [dbo].[Sys_LOG] AS [Sys_LOG]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="v_NewsCenterComment" EntityType="Self.v_NewsCenterComment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_NewsCenterComment].[Name] AS [Name], 
+    [v_NewsCenterComment].[Email] AS [Email], 
+    [v_NewsCenterComment].[Mobile] AS [Mobile], 
+    [v_NewsCenterComment].[Message] AS [Message], 
+    [v_NewsCenterComment].[SubmitDate] AS [SubmitDate], 
+    [v_NewsCenterComment].[IsDelete] AS [IsDelete], 
+    [v_NewsCenterComment].[IsDisplay] AS [IsDisplay], 
+    [v_NewsCenterComment].[IsLook] AS [IsLook], 
+    [v_NewsCenterComment].[OperationDate] AS [OperationDate], 
+    [v_NewsCenterComment].[MessType] AS [MessType], 
+    [v_NewsCenterComment].[ID] AS [ID], 
+    [v_NewsCenterComment].[ArticlesDate] AS [ArticlesDate], 
+    [v_NewsCenterComment].[ArticlesType] AS [ArticlesType], 
+    [v_NewsCenterComment].[ArticlesContent] AS [ArticlesContent], 
+    [v_NewsCenterComment].[ArticlesTitle] AS [ArticlesTitle], 
+    [v_NewsCenterComment].[CommentariesID] AS [CommentariesID], 
+    [v_NewsCenterComment].[Creationtime] AS [Creationtime], 
+    [v_NewsCenterComment].[CreationPeople] AS [CreationPeople], 
+    [v_NewsCenterComment].[ImgPath] AS [ImgPath], 
+    [v_NewsCenterComment].[tags] AS [tags], 
+    [v_NewsCenterComment].[IsComment] AS [IsComment], 
+    [v_NewsCenterComment].[CommentID] AS [CommentID]
+    FROM [dbo].[v_NewsCenterComment] AS [v_NewsCenterComment]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -235,6 +298,7 @@
           <EntitySet Name="tb_Dictionary" EntityType="lmModel.tb_Dictionary" />
           <EntitySet Name="tb_UploadFile" EntityType="lmModel.tb_UploadFile" />
           <EntitySet Name="tb_CommentMessage" EntityType="lmModel.tb_CommentMessage" />
+          <EntitySet Name="v_NewsCenterComment" EntityType="lmModel.v_NewsCenterComment" />
         </EntityContainer>
         <EntityType Name="Sys_Users">
           <Key>
@@ -419,6 +483,41 @@
           <Property Name="IsLook" Type="Boolean" Nullable="false" />
           <Property Name="OperationDate" Type="DateTime" Precision="3" />
           <Property Name="MessType" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="v_NewsCenterComment">
+          <Key>
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="Message" />
+            <PropertyRef Name="SubmitDate" />
+            <PropertyRef Name="IsDelete" />
+            <PropertyRef Name="IsDisplay" />
+            <PropertyRef Name="IsLook" />
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SubmitDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="IsDisplay" Type="Boolean" Nullable="false" />
+          <Property Name="IsLook" Type="Boolean" Nullable="false" />
+          <Property Name="OperationDate" Type="DateTime" Precision="3" />
+          <Property Name="MessType" Type="Boolean" />
+          <Property Name="ID" Type="Int32" />
+          <Property Name="ArticlesDate" Type="DateTime" Precision="3" />
+          <Property Name="ArticlesType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ArticlesContent" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="ArticlesTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CommentariesID" Type="Int32" />
+          <Property Name="Creationtime" Type="DateTime" Precision="3" />
+          <Property Name="CreationPeople" Type="Int32" />
+          <Property Name="ImgPath" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="tags" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsComment" Type="Boolean" />
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -619,6 +718,34 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CommentariesID" ColumnName="CommentariesID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_NewsCenterComment">
+            <EntityTypeMapping TypeName="lmModel.v_NewsCenterComment">
+              <MappingFragment StoreEntitySet="v_NewsCenterComment">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="IsComment" ColumnName="IsComment" />
+                <ScalarProperty Name="tags" ColumnName="tags" />
+                <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+                <ScalarProperty Name="CreationPeople" ColumnName="CreationPeople" />
+                <ScalarProperty Name="Creationtime" ColumnName="Creationtime" />
+                <ScalarProperty Name="CommentariesID" ColumnName="CommentariesID" />
+                <ScalarProperty Name="ArticlesTitle" ColumnName="ArticlesTitle" />
+                <ScalarProperty Name="ArticlesContent" ColumnName="ArticlesContent" />
+                <ScalarProperty Name="ArticlesType" ColumnName="ArticlesType" />
+                <ScalarProperty Name="ArticlesDate" ColumnName="ArticlesDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MessType" ColumnName="MessType" />
+                <ScalarProperty Name="OperationDate" ColumnName="OperationDate" />
+                <ScalarProperty Name="IsLook" ColumnName="IsLook" />
+                <ScalarProperty Name="IsDisplay" ColumnName="IsDisplay" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

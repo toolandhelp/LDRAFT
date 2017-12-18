@@ -36,6 +36,14 @@ namespace Lm.BLL
         {
             return dbContext.SearchBySingle(c => c.ID == iid);
         }
+
+
+        public IList<v_NewsCenterComment> GetNCommentListByAll()
+        {
+            var service = new DbHelperEfSql<v_NewsCenterComment>();
+            return service.SearchByAll();
+        }
+
         #endregion
     }
 }

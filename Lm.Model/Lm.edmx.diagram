@@ -17,6 +17,7 @@
         <EntityTypeShape EntityType="lmModel.tb_Dictionary" Width="1.5" PointX="6.875" PointY="4.125" />
         <EntityTypeShape EntityType="lmModel.tb_UploadFile" Width="1.5" PointX="4.75" PointY="7.75" />
         <EntityTypeShape EntityType="lmModel.tb_CommentMessage" Width="1.5" PointX="6.875" PointY="7.75" />
+        <EntityTypeShape EntityType="lmModel.v_NewsCenterComment" Width="1.5" PointX="8.875" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
